@@ -1,0 +1,7 @@
+﻿table.layout-header td.layout-header { vertical-align: middle; padding: 5px 10px 5px 10px; }
+table.layout-center td.layout-center { vertical-align: top; padding: 5px 5px 5px 5px; }
+table.grid { border-collapse: collapse; border: solid 1px black;  }
+table.grid th { vertical-align: top; border:1px solid black }
+table.grid td { vertical-align: top; border:1px solid black; padding: 5px 10px 5px 10px; font-family:monospace; font-size: small; }
+table.grid td.bytes { font-size: x-small; }
+div.code { width: 700px; height: 700px; overflow: auto; background: #EEEEEE; border: solid 1px #CCCCCC; padding: 10px 10px 10px 10px; }

@@ -1,0 +1,44 @@
+﻿body
+{
+	font-family: Verdana;
+	font-size: 10pt;
+	background-color: White;
+	margin: 10px;
+}
+/*
+body > div.wrapper
+{
+	width: 355px;
+	height: 235px;
+}
+*/
+Div#NotMyComputerDiv
+{
+	display: none;
+}
+
+.helpDoc
+{
+	font-size: 80%;
+}
+
+
+li.OPButton
+{
+    float: left;
+}
+
+OPButton loginSuccess
+{
+    float: left;
+}
+
+li.OpenIDButton
+{
+    float: left;
+}
+
+li.infocard
+{
+    float: left;
+}

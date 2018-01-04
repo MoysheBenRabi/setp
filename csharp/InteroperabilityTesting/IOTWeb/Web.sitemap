@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+    <siteMapNode url="" title=""  description="">
+      <siteMapNode url="default.aspx" title="Test Suite State"  description="">
+        <siteMapNode url="message_serialization_verification.aspx" title="1) Message Serialization"  description="" >
+          <siteMapNode url="reference_messages.aspx" title="Message Serialization Help"  description="" />
+        </siteMapNode>
+        <siteMapNode url="candidate_client_to_reference_server_tests.aspx" title="2) Client to Reference Server"  description="">
+          <siteMapNode url="candidate_client_to_reference_server_docs.aspx" title="Client to Reference Server Help"  description="" />
+        </siteMapNode>
+      </siteMapNode>
+    </siteMapNode>
+</siteMap>

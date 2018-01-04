@@ -1,0 +1,201 @@
+\Fragments
+ResponseFragment
+    uint request_message_id
+    byte failure_code
+
+ProgramFragment
+    string[25] program_name
+    byte       program_major_version
+    byte       program_minor_version
+    byte       protocol_major_version
+    byte       protocol_minor_version
+    uint       protocol_source_revision
+
+ObjectFragment
+    uuid       object_id
+    uint       object_index
+    uuid       type_id
+    uuid       parent_object_id
+    string[20] object_name
+    string[20] type_name
+    uuid       owner_id
+    vector3f   location
+    vector3f   velocity
+    vector3f   acceleration
+    vector4f   orientation
+    vector4f   angular_velocity
+    vector4f   angular_acceleration
+    float      bound_sphere_radius
+    float      mass
+    string[4]  extension_dialect
+    byte       extension_dialect_major_version
+    byte       extension_dialect_minor_version
+    uint       extension_length
+    data[x]    extension_data
+
+InteractionFragment
+    string[20] interaction_name
+    uuid       source_participant_id
+    uuid       source_object_id
+    uuid       target_participant_id
+    uuid       target_object_id
+    string[4]  extension_dialect
+    byte       extension_dialect_major_version
+    byte       extension_dialect_minor_version
+    uint       extension_length
+    data[x]    extension_data
+
+BubbleFragment    
+    uuid       bubble_id
+    string[40] bubble_name
+    string[51] bubble_asset_cache_url
+    uuid       owner_id
+    string[40] bubble_address
+    uint       bubble_port
+    vector3f   bubble_center
+    float      bubble_range
+    float      bubble_perception_range
+    time       bubble_realtime
+
+\Messages
+# Control
+Acknowledge(1)
+    uint[MXP_MAX_FRAME_DATA_SIZE / 4] acknowledged_packet_id
+
+Keepalive(2)
+
+Throttle(3)
+    uint transfer_rate
+
+# Challenge
+ChallengeRequest(4)
+    data[64] challenge_data
+
+ChallengeResponse(5)
+    data[64] challenge_data
+
+# Participant to Bubble Commands
+JoinRequest(10)
+    uuid            bubble_id
+    uuid            avatar_id
+    string[40]      bubble_name
+    string[28]      location_name
+    string[32]      participant_identifier
+    string[32]      participant_secret
+    time            participant_realtime
+    string[50]      inedtitiy_provider_url
+    ProgramFragment client_program
+
+JoinResponse(11)
+    ResponseFragment response_header
+    uuid             bubble_id
+    uuid             participant_id
+    uuid             avatar_id
+    string[40]       bubble_name
+    string[50]       bubble_asset_cache_url
+    float            bubble_range
+    float            bubble_perception_range
+    time             bubble_realtime
+
+LeaveRequest(12)
+
+LeaveResponse(13)
+    ResponseFragment response_header
+
+InjectRequest(14)
+    ObjectFragment object_header
+
+InjectResponse(15)
+    ResponseFragment response_header
+
+ModifyRequest(16)
+    ObjectFragment object_header
+
+ModifyResponse(17)
+    ResponseFragment response_header
+
+EjectRequest(18)
+    uuid object_id
+
+EjectResponse(19)
+    ResponseFragment response_header
+
+InteractRequest(20)
+    InteractionFragment response
+
+InteractResponse(21)
+    ResponseFragment    response_header
+    InteractionFragment response
+
+ExamineRequest(22)
+    uuid object_id
+    uint object_index
+
+ExamineResponse(23)
+
+# Bubble to Bubble Commands
+AttachRequest(30)
+    uuid            target_bubble_id
+    BubbleFragment  source_bubble
+    ProgramFragment source_bubble_server
+
+AttachResponse(31)
+    ResponseFragment    response_header
+    BubbleFragment  target_bubble
+    ProgramFragment target_bubble_server
+
+DetachRequest(32)
+
+DetachResponse(33)
+    ResponseFragment    response_header
+
+HandoverRequest(34)
+    uuid source_bubble_id
+    uuid target_bubble_id
+    ObjectFragment object_header
+
+HandoverResponse(35)
+    ResponseFragment    response_header
+
+# Common Commands
+ListBubblesRequest(25)
+    byte list_type # [0 = hosted, 1 = linked, 2 = connected] 
+
+ListBubblesResponse(26)
+N x {
+    BubbleFragment bubble
+    byte[60] padding = 0;
+}
+
+# Common Events
+PerceptionEvent(40)
+    ObjectFragment object_header
+
+MovementEvent(41)
+    uint     object_index
+    vector3f location
+    vector4f orientation
+
+DisappearanceEvent(45)
+    uint object_index
+
+HandoverEvent(53)
+    uuid source_bubble_id
+    uuid target_bubble_id
+    ObjectFragment object_header
+
+ActionEvent(60)
+    string[20] action_name
+    uuid       source_object_id
+    float      observation_radius
+    string[4]  extension_dialect
+    byte       extension_dialect_major_version
+    byte       extension_dialect_minor_version
+    uint       extension_length
+    data[x]    extension_data
+
+SynchronizationBeginEvent(70)
+    uint object_count
+
+SynchronizationEndEvent(71)
+

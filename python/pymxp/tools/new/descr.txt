@@ -1,0 +1,348 @@
+#   Copyright 2009 Moyshe BenRabi
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+
+\Constants
+time epoch_2k = "2000.01.01"
+
+\Fragments
+ResponseFragment
+    uint request_message_id
+    byte failure_code
+
+ProgramFragment
+    string[25] program_name                    = "TestProgramName"
+    byte       program_major_version           = base
+    byte       program_minor_version           = base + 1
+    byte       protocol_major_version          = base + 2
+    byte       protocol_minor_version          = base + 3
+    uint       protocol_source_revision        = base + 4
+
+ObjectFragment
+    uuid       object_id                       = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    uint       object_index                    = 1
+    uuid       type_id                         = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    uuid       parent_object_id                = "00000000-0000-0000-0000-000000000000"
+    string[20] object_name                     = "TestObjectName"
+    string[20] type_name                       = "TestTypeName"
+    uuid       owner_id                        = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    vector3f   location                        = { 1.0,  2.0,  3.0 }
+    vector3f   velocity                        = { 4.0,  5.0,  6.0 }
+    vector3f   acceleration                    = { 7.0,  8.0,  9.0 }
+    vector4f   orientation                     = { 10.0, 11.0, 12.0, 13.0 }
+    vector4f   angular_velocity                = { 14.0, 15.0, 16.0, 17.0 }
+    vector4f   angular_acceleration            = { 18.0, 19.0, 20.0, 21.0 }
+    float      bound_sphere_radius             = 22.0
+    float      mass                            = 23.0
+    string[4]  extension_dialect               = "TEST"
+    byte       extension_dialect_major_version = 0
+    byte       extension_dialect_minor_version = 0
+    uint       extension_length                = 40
+    data[x]    extension_data                  = { 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                                               48 };
+
+InteractionFragment
+    string[20] interaction_name                = "TestInteractionName"
+    uuid       source_participant_id           = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    uuid       source_object_id                = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    uuid       target_participant_id           = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    uuid       target_object_id                = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    string[4]  extension_dialect               = "TEST"
+    byte       extension_dialect_major_version = 0
+    byte       extension_dialect_minor_version = 0
+    uint       extension_length                = 2
+    data[x]    extension_data                  = {49, 50}
+
+BubbleFragment    
+    uuid       bubble_id                       = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    string[40] bubble_name                     = "TestBubble1"
+    string[51] bubble_asset_cache_url          = "TestCloudUrl"
+    uuid       owner_id                        = "00000000-0000-0000-0000-000000000000"
+    string[40] bubble_address                  = "TestBubbleAddress"
+    uint       bubble_port                     = 1
+    vector3f   bubble_center                   = { 2.0, 3.0, 4.0 }
+    float      bubble_range                    = 5.0
+    float      bubble_perception_range         = 6.0
+    time       bubble_realtime                 = epoch_2k + 7ms;
+
+\Messages
+# Control
+Acknowledge(1)
+    uint[MXP_MAX_FRAME_DATA_SIZE / 4] acknowledged_packet_id = { 1, 2, 3, 4, 5 }
+
+Keepalive(2)
+
+Throttle(3)
+    uint transfer_rate = 10000
+
+# Challenge
+ChallengeRequest(4)
+    data[64] challenge_data = { 0,  1,  2,  3,  4,  5,  6,  7,  8,  9,
+                               10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                               20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+                               30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+                               40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
+                               50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
+                               60, 61, 62, 63 }
+
+ChallengeResponse(5)
+    data[64] challenge_data = { 0,  1,  2,  3,  4,  5,  6,  7,  8,  9,
+                               10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                               20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+                               30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+                               40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
+                               50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
+                               60, 61, 62, 63 }
+
+# Participant to Bubble Commands
+JoinRequest(10)
+    uuid            bubble_id              = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    uuid            avatar_id              = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    string[40]      bubble_name            = "TestBubbleName"
+    string[28]      location_name          = "TestLocation"
+    string[32]      participant_identifier = "TestParticipantName"
+    string[32]      participant_secret     = "TestParticipantPassphrase"
+    time            participant_realtime   = epoch_2k + 10ms
+    string[50]      inedtitiy_provider_url = "IdentityProviderUrl"
+    ProgramFragment client_program         = {}
+
+JoinResponse(11)
+    uuid       bubble_id                   = "00000000-0000-0000-0000-000000000000"
+    uuid       participant_id              = "00000000-0000-0000-0000-000000000000"
+    uuid       avatar_id                   = "00000000-0000-0000-0000-000000000000"
+    string[40] bubble_name                 = "TestBubbleName"
+    string[50] bubble_asset_cache_url      = "TestBubbleAssetCacheUrl"
+    float      bubble_range                = 3.0
+    float      bubble_perception_range     = 4.0
+    time       bubble_realtime             epoch_2k + 5ms
+
+LeaveRequest(12)
+
+LeaveResponse(13)
+    ResponseFragment response_header       = ResponseFragment()
+
+InjectRequest(14)
+    ObjectFragment object_header         = ObjectFragment( 
+        extension_dialect_minor_version = 25,
+        extension_dialect_major_version = 24,
+        extension_length = 45,
+        extension_data = {  49, 50, 51, 52, 53, 54, 55, 56, 57,
+                        48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                        48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                        48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                        48, 49, 50, 51, 52, 53 })
+
+InjectResponse(15)
+    ResponseFragment response_header = ResponseFragment()
+
+ModifyRequest(16)
+    ObjectFragment object_header = ObjectFragment(
+        extension_length = 398,
+        extension_data = { 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56 })
+
+ModifyResponse(17)
+    ResponseFragment response_header = ResponseFragment()
+
+EjectRequest(18)
+    uuid object_id = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+
+EjectResponse(19)
+    ResponseFragment response_header = ResponseFragment()
+
+InteractRequest(20)
+    InteractionFragment request = InteractionFragment(
+        extension_length = 161,
+        extension_data = { 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49 }) 
+
+InteractResponse(21)
+    ResponseFragment    response_header = ResponseFragment()
+    InteractionFragment response = InteractionFragment(
+        extension_length = 156,
+        extension_data = { 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54 })
+
+ExamineRequest(22)
+    uuid object_id    = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    uint object_index = 1
+
+ExamineResponse(23)
+    ResponseFragment response_header = ResponseFragment()
+    ObjectFragment   object_header   = ObjectFragment()
+
+# Bubble to Bubble Commands
+AttachRequest(30)
+    uuid            target_bubble_id     = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    BubbleFragment  source_bubble        = BubbleFragment()
+    ProgramFragment source_bubble_server = ProgramFragment()
+
+AttachResponse(31)
+    ResponseFragment response_header      = ResponseFragment()
+    BubbleFragment   target_bubble        = BubbleFragment()
+    ProgramFragment  target_bubble_server = ProgramFragment()
+
+DetachRequest(32)
+
+DetachResponse(33)
+    ResponseFragment response_header = ResponseFragment()
+
+HandoverRequest(34)
+    uuid source_bubble_id        = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    uuid target_bubble_id        = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    ObjectFragment object_header = ObjectFragment(
+        extension_length = 13, 
+        extension_data   = { 49, 50, 51, 52, 53,54, 55, 56, 57, 
+                         48, 49, 50, 51 })
+
+HandoverResponse(35)
+    ResponseFragment    response_header = ResponseFragment()
+
+# Common Commands
+ListBubblesRequest(25)
+    byte list_type = 0 # [0 = hosted, 1 = linked, 2 = connected] 
+
+ListBubblesResponse(26)
+N x {
+    BubbleFragment bubble
+    byte[60] padding = 0
+}
+
+# Common Events
+PerceptionEvent(40)
+    ObjectFragment object_header = ObjectFragment(
+        extension_length = 45,
+        extension_data = { 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                       48, 49, 50, 51, 52, 53 })
+
+MovementEvent(41)
+    uint     object_index = 1
+    vector3f location     = { 1.0, 2.0, 3.0 }
+    vector4f orientation  = { 10.0, 11.0, 12.0, 13.0 }
+
+DisappearanceEvent(45)
+    uint object_index = 1
+
+HandoverEvent(53)
+    uuid source_bubble_id        = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    uuid target_bubble_id        = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+    ObjectFragment object_header = (extension_length = 13 
+    		   		    extension_data = {49, 50, 51, 52, 53, 54, 55, 56, 57,
+                                                  48, 49, 50, 51 })
+
+ActionEvent(60)
+    string[20] action_name                     = "TestInteractionName"
+    uuid       source_object_id                = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee" 
+    float      observation_radius              = 100
+    string[4]  extension_dialect               = "TEST"
+    byte       extension_dialect_major_version = 1
+    byte       extension_dialect_minor_version = 2
+    uint       extension_length                = 205
+    data[x]    extension_data                  = { 49, 50, 51, 52, 53, 54, 55, 56, 57, 
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 
+                                               48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 
+                                               48, 49, 50, 51, 52, 53 }  
+
+SynchronizationBeginEvent(70)
+    uint object_count = 1
+
+SynchronizationEndEvent(71)

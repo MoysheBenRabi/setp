@@ -1,0 +1,4 @@
+<Model name="bubble2" geometry="models/bubble2/bubble2.geo">
+
+	<Mesh name="Mesh" material="models/bubble2/Material-Default.material.xml" batchStart="0" batchCount="54000" vertRStart="0" vertREnd="9330" />
+</Model>

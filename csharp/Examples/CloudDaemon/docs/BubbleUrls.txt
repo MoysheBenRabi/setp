@@ -1,0 +1,2 @@
+Local: http://localhost:1686/Members/GetLoginSecret.aspx?goto=mxp://127.0.0.1:1255/bde2a7df-af3f-43c0-8f79-ee1d3504e3db
+Hub: http://hub.bubblecloud.org/Members/GetLoginSecret.aspx?goto=mxp://hub.bubblecloud.org:1253/c6aa30d9-d94c-4bde-9b24-c07af8539fc5

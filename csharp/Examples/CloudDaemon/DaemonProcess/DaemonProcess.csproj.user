@@ -1,0 +1,7 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <StartArguments>5b77d0ab-dfcc-4ef4-b4ad-f88483b528ab</StartArguments>
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\Development\MXP\csharp\Examples\CloudDaemon\DaemonProcess\bin\Debug\DaemonProcess.exe</StartProgram>
+  </PropertyGroup>
+</Project>

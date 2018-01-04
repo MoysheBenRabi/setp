@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+    <siteMapNode url="" title=""  description="">
+        <siteMapNode url="Default.aspx" title="Home"  description="Home" />
+        <siteMapNode url="~/Members/Default.aspx" title="Personal"  description="My private area.">
+          <siteMapNode url="~/Members/MyLocalProcessStates.aspx" title="Processes"  description="My host processes." />
+          <siteMapNode url="~/Members/MyLocalProcesses.aspx" title="Hosts"  description="My defined hosts." />
+          <siteMapNode url="~/Members/MyRemoteProcesses.aspx" title="Trusts"  description="My trusted remote hosts which can link to me." />
+          <siteMapNode url="~/Members/MyBubbles.aspx" title="Bubbles"  description="My bubble definitions." />
+          <siteMapNode url="~/Members/MyObjectTypes.aspx" title="Types"  description="My object type definitions." />
+          <siteMapNode url="~/Members/MyObjects.aspx" title="Objects"  description="My objects." />
+        </siteMapNode>
+      <siteMapNode  url="~/Admin/Default.aspx" title="Administrative"  description="The administrative area.">        
+      </siteMapNode>
+    </siteMapNode>
+</siteMap>

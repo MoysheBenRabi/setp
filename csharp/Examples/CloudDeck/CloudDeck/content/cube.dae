@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+    <asset>
+        <contributor>
+            <author>Tommi Laukkanen</author>
+            <authoring_tool>modo 401 [Build 34083], Microsoft Windows Vista Service Pack 1 (6.0.6001 Service Pack 1)</authoring_tool>
+            <comments>
+                Use Absolute Path: No;
+                Merge Reference Items: Yes;
+                Bake Matrices: Yes;
+                Save Normals: Yes;
+                Save UV Texture Coordinates: Yes;
+                Save Animation: Yes;
+                Sample Animation: No;
+                Sample Animation Start: 0;
+                Sample Animation End: 120;
+                Save modo Profile: No;
+                Save Maya Profile: No;
+                Save 3ds Max Profile: No;
+                Formatted Arrays: Yes;
+            </comments>
+            <copyright>BubbleCloud.org</copyright>
+            <source_data>file:///D:/Modo/content/Own/cube.lxo</source_data>
+        </contributor>
+        <created>2010-02-21T09:54:58Z</created>
+        <modified>2010-02-21T09:54:58Z</modified>
+        <up_axis>Y_UP</up_axis>
+    </asset>
+    <library_cameras>
+        <camera id="Camera-Camera" name="Camera">
+            <optics>
+                <technique_common>
+                    <perspective>
+                        <xfov sid="HFOV">39.5978</xfov>
+                        <yfov sid="YFOV">26.9915</yfov>
+                        <znear sid="near_clip">0.01</znear>
+                        <zfar sid="far_clip">10000</zfar>
+                    </perspective>
+                </technique_common>
+            </optics>
+        </camera>
+    </library_cameras>
+    <library_effects>
+        <effect id="Effect-Default" name="Default">
+            <profile_COMMON>
+                <newparam sid="Image0001-surface">
+                    <surface type="2D">
+                        <init_from>Image0001</init_from>
+                        <format>A8R8G8B8</format>
+                    </surface>
+                </newparam>
+                <newparam sid="Image0001-sampler">
+                    <sampler2D>
+                        <source>Image0001-surface</source>
+                        <minfilter>LINEAR_MIPMAP_LINEAR</minfilter>
+                        <magfilter>LINEAR</magfilter>
+                    </sampler2D>
+                </newparam>
+                <technique sid="common">
+                    <phong>
+                        <diffuse>
+                            <texture texture="Image0001-sampler" texcoord="Texture" />
+                        </diffuse>
+                        <specular>
+                            <color sid="specular_effect_rgb">0.2 0.2 0.2 1</color>
+                        </specular>
+                    </phong>
+                </technique>
+            </profile_COMMON>
+        </effect>
+    </library_effects>
+    <library_geometries>
+        <geometry id="Geometry-Cube" name="Cube">
+            <mesh>
+                <source id="Geometry-Cube-positions" name="positions">
+                    <float_array id="Geometry-Cube-positions-array" count="48">
+                        -0.5 -0.5 -0.5
+                        0.5 -0.5 -0.5
+                        0.5 -0.5 0.5
+                        -0.5 -0.5 0.5
+                        -0.5 0.5 -0.5
+                        0.5 0.5 -0.5
+                        0.5 0.5 0.5
+                        -0.5 0.5 0.5
+                        -0.5 -0.5 -0.5
+                        0.5 -0.5 -0.5
+                        0.5 -0.5 0.5
+                        -0.5 -0.5 0.5
+                        -0.5 0.5 -0.5
+                        0.5 0.5 -0.5
+                        0.5 0.5 0.5
+                        -0.5 0.5 0.5
+                    </float_array>
+                    <technique_common>
+                        <accessor count="16" source="#Geometry-Cube-positions-array" stride="3">
+                            <param name="X" type="float" />
+                            <param name="Y" type="float" />
+                            <param name="Z" type="float" />
+                        </accessor>
+                    </technique_common>
+                </source>
+                <source id="Geometry-Cube-normals" name="normals">
+                    <float_array id="Geometry-Cube-normals-array" count="18">
+                        0 0 1
+                        0 0 -1
+                        0 1 0
+                        1 0 0
+                        0 -1 0
+                        -1 0 0
+                    </float_array>
+                    <technique_common>
+                        <accessor count="6" source="#Geometry-Cube-normals-array" stride="3">
+                            <param name="X" type="float" />
+                            <param name="Y" type="float" />
+                            <param name="Z" type="float" />
+                        </accessor>
+                    </technique_common>
+                </source>
+                <source id="Geometry-Cube-Texture" name="Texture">
+                    <float_array id="Geometry-Cube-Texture-array" count="28">
+                        0.5 0.666667
+                        0.25 0.666667
+                        0.5 0.333333
+                        0.25 0.333333
+                        1 0.666667
+                        0.75 0.666667
+                        1 0.333333
+                        0.75 0.333333
+                        0.25 1
+                        0.5 1
+                        0.25 0
+                        0.5 0
+                        0 0.666667
+                        0 0.333333
+                    </float_array>
+                    <technique_common>
+                        <accessor count="14" source="#Geometry-Cube-Texture-array" stride="2">
+                            <param name="S" type="float" />
+                            <param name="T" type="float" />
+                        </accessor>
+                    </technique_common>
+                </source>
+                <vertices id="Geometry-Cube-vertices">
+                    <input semantic="POSITION" source="#Geometry-Cube-positions" />
+                </vertices>
+                <polylist count="24" material="MatSym-Default">
+                    <input semantic="VERTEX" source="#Geometry-Cube-vertices" offset="0" />
+                    <input semantic="NORMAL" source="#Geometry-Cube-normals" offset="1" />
+                    <input semantic="TEXCOORD" source="#Geometry-Cube-Texture" offset="2" set="0" />
+                    <vcount>3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3</vcount>
+                    <p>6 0 0 7 0 1 2 0 2 3 0 3 2 0 2 7 0 1 12 1 4 13 1 5 8 1 6 9 1 7 8 1 6 13 1 5 12 2 8 15 2 1 13 2 9 14 2 0 13 2 9 15 2 1 5 3 5 6 3 0 1 3 7 2 3 2 1 3 7 6 3 0 8 4 10 9 4 11 11 4 3 10 4 2 11 4 3 9 4 11 15 5 1 12 5 12 11 5 3 8 5 13 11 5 3 12 5 12 4 1 4 5 1 5 0 1 6 1 1 7 0 1 6 5 1 5 4 2 8 7 2 1 5 2 9 6 2 0 5 2 9 7 2 1 14 0 0 15 0 1 10 0 2 11 0 3 10 0 2 15 0 1 0 4 10 1 4 11 3 4 3 2 4 2 3 4 3 1 4 11 7 5 1 4 5 12 3 5 3 0 5 13 3 5 3 4 5 12 13 3 5 14 3 0 9 3 7 10 3 2 9 3 7 14 3 0</p>
+                </polylist>
+            </mesh>
+        </geometry>
+    </library_geometries>
+    <library_images>
+        <image id="Image0001" name="Image0001">
+            <init_from>../Content/textures/bubblematerial.png</init_from>
+        </image>
+    </library_images>
+    <library_lights>
+        <light id="Light-Render" name="Render">
+            <technique_common>
+                <ambient>
+                    <color sid="ambient_light_rgb">0.05 0.05 0.05</color>
+                </ambient>
+            </technique_common>
+        </light>
+        <light id="Light-Directional_Light" name="Directional_Light">
+            <technique_common>
+                <directional>
+                    <color sid="directional_light_rgb">1 1 1</color>
+                </directional>
+            </technique_common>
+        </light>
+    </library_lights>
+    <library_materials>
+        <material id="Material-Default" name="Default">
+            <instance_effect url="#Effect-Default" />
+        </material>
+    </library_materials>
+    <library_visual_scenes>
+        <visual_scene id="DefaultScene">
+            <asset>
+                <created>2010-02-21T09:54:58Z</created>
+                <modified>2010-02-21T09:54:58Z</modified>
+                <up_axis>Y_UP</up_axis>
+            </asset>
+            <node id="RenderNode" name="Render" type="NODE">
+                <instance_light url="#Light-Render" />
+            </node>
+            <node id="Geometry-CubeNode" name="Cube" type="NODE">
+                <matrix sid="transform">
+        1 0 0 0
+        0 1 0 0
+        0 0 1 0
+        0 0 0 1
+    </matrix>
+                <instance_geometry url="#Geometry-Cube">
+                    <bind_material>
+                        <technique_common>
+                            <instance_material symbol="MatSym-Default" target="#Material-Default">
+                                <bind_vertex_input semantic="Texture" input_semantic="TEXCOORD" input_set="0" />
+                            </instance_material>
+                        </technique_common>
+                    </bind_material>
+                </instance_geometry>
+            </node>
+            <node id="Camera-CameraNode" name="Camera" type="NODE">
+                <matrix sid="transform">
+        1 0 0 0
+        0 0.996195 0.0871557 0.75
+        0 -0.0871557 0.996195 4
+        0 0 0 1
+    </matrix>
+                <instance_camera url="#Camera-Camera" />
+            </node>
+            <node id="Texture_GroupNode" name="Texture_Group" type="NODE">
+                <matrix sid="transform">
+        1 0 0 0
+        0 1 0 0
+        0 0 1 0
+        0 0 0 1
+    </matrix>
+                <node id="BubbleNode" name="Bubble" type="NODE">
+                    <matrix sid="transform">
+        1 0 0 0
+        0 1 0 0
+        0 0 1 0
+        0 0 0 1
+    </matrix>
+                    <node id="Texture__Image__bubblematerialNode" name="Texture__Image__bubblematerial" type="NODE">
+                        <matrix sid="transform">
+        1 0 0 0
+        0 1 0 0
+        0 0 1 0
+        0 0 0 1
+    </matrix>
+                    </node>
+                </node>
+            </node>
+            <node id="Light-Directional_LightNode" name="Directional_Light" type="NODE">
+                <matrix sid="transform">
+        0.707107 0.353553 -0.612372 -2
+        0 0.866025 0.5 2
+        0.707107 -0.353553 0.612372 2
+        0 0 0 1
+    </matrix>
+                <instance_light url="#Light-Directional_Light" />
+            </node>
+        </visual_scene>
+    </library_visual_scenes>
+    <scene>
+        <instance_visual_scene url="#DefaultScene" />
+    </scene>
+</COLLADA>

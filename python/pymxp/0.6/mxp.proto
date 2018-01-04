@@ -1,0 +1,274 @@
+package MXP;
+
+message MVector3f {
+required float X=1;
+required float Y=2;
+required float Z=3;
+}
+
+message MQuaternion4f {
+required float X=1;
+required float Y=2;
+required float Z=3;
+required float W=4;
+}
+
+message MColor4f {
+required float R=1;
+required float G=2;
+required float B=3;
+required float A=4;
+}
+
+message ResponseSection {
+required MessageId=1;
+required FailureCode=2;
+}
+
+message ProgramRegion {
+required string ProgramName=1;
+required uint32 ProgramMajorVersion=2;
+required uint32 ProgramMinorVersion=3;
+required uint32 ProgramRevision=5;
+required uint32 ProtocolSpecivficationMajorVersion=6;
+required uint32 ProtocolSpecivficationMinorVersion=6;
+required uint32 ProtocolBuildNumber=8;
+required uint32 ProtocolRevision=9;
+}
+
+message IdentitySection {
+required string ObjectId=1;
+required string TypeId=2;
+required string ParentId=3;
+required string OwnerId=6;
+required string ObjectName=7;
+required bool Persistent=8;
+required bool Observer=9;
+}
+
+message OrientationSection {
+required MVector3f Location=1;
+required MVector3f Velocity=2;
+}
+
+message MotionSection {
+required MQuaternion4f Orientation=1;
+required MQuaternion4f AngularVelocity=2;
+}
+
+message ForceSection {
+required MVector3f Acceleration=1;
+required MQuaternion4f AgnularAcceleration=2;
+}
+
+message BodySection {
+required float BoundingRadius=1;
+required float Mass=2;
+}
+
+message ObjectSection {
+optional uint32 ObjectIndex=1;
+optional IdentitySection Identity=2;
+optional OrientationSection Orientation=3;
+optional MotionSection Motion=4;
+optional ForceSection Force=5;
+oprional BodySection Body=6;
+extensions 100 to 1000;
+}
+
+message InteractionSection {
+required string InteractionName=1;
+required string SourceParticipantId=2;
+required string SourceObjectId=3;
+required string TargetParticipantId=4;
+required string TargetObjectId=5;
+extensions 100 to 1000;
+}
+
+message BubbleSection {
+required string BubbleId=1;
+required string BubbleName=2;
+required string BubbleAssetUrl=3;
+required string OwnerId=4;
+required string BubbleAddress=5;
+required uint32 BubblePort=6;
+required MVector3f BubbleCenter=7;
+required float BubbleRange=8;
+required float BubblePerceptionRange=9;
+}
+
+message JoinRequest {
+required uint32 MessageId=1;
+optional string BubbleId=2;
+optional string BubbleName=3;
+optional string LocationName=4;
+required string ParticipantId=5;
+optional string ParticipantSecret=6;
+required string AvatarId=7;
+required ProgramRegion ClientProgram=8;
+}
+
+message JoinResponse {
+required uint32 MessageId=1;
+required string BubbleId=2;
+required string ParticipantId=3;
+required string AvatarId=4;
+required string BubbleName=5;
+required string BubbleAssetUrl=6;
+required float BubbleRenge=7;
+required float BubblePerceptionRange=8;
+}
+
+message LeaveRequest {
+required uint32 MessageId=1;
+}
+
+message LeaveResponse {
+required uint32 MessageId=1;
+required ResponseSection Response=2;
+}
+
+message InjectRequest {
+required uint32 MessageId=1;
+optional ObjectSection Object=2;
+}
+
+message InjectResponse {
+required uint32 MessageId=1;
+required ResponseSection Response=2;
+}
+
+message EjectRequest {
+required uint32 MessageId=1;
+required string ObjectId=2;
+}
+
+message EjectResponce {
+required uint32 MessageId=1;
+required ResponseSection Response=2;
+}
+
+message InteractionRequest {
+required uint32 MessageId=1;
+optional InteractionSection Interaction=2;
+}
+
+message InteractionResponse {
+required uint32 MessageId=1;
+required ResponseSection Response=2;
+optional InteractionSection Interaction=3;
+}
+
+message AttachRequest {
+required uint32 MessageId=1;
+required string TargetBubbleId=2;
+required BubbleSection SourceBubble=3;
+required ProgramSection SourceProgram=4;
+}
+
+message AttachRequest {
+required uint32 MessageId=1;
+required ResponseSection Response=2;
+required BubbleSection TargetBubble=3;
+required ProgramSection TargetProgram=4;
+}
+
+message DetachRequest {
+required uint32 MessageId=1;
+}
+
+message DetachRequest {
+required uint32 MessageId=1;
+required ResponseSection Response=2;
+}
+
+message HandoverRequest {
+required uint32 MessageId=1;
+required string SourceBubbleId=2;
+required string TargetBubbleId=3;
+required ObjectSection Object=4;
+}
+
+message HandoverRequest {
+required uint32 MessageId=1;
+required ResponseSection Response=2;
+}
+
+enum ListType {
+     Hosted = 0;
+     Linked = 1;
+     Connected = 2;
+}
+
+message ListBubblesRequest {
+required uint32 MessageId=1;
+required ListType listType=2;
+}
+
+message ListBubblesResponce {
+required uint32 MessageId=1;
+required ResponseSection Response=2;
+required BubbleSection Bubble=3;
+}
+
+message PercetionEvent {
+required uint32 MessageId=1;
+required ObjectSection Object=2;
+}
+
+message DisappearanceEvent {
+required uint32 MessageId=1;
+required uint32 ObjectIndex=2;
+}
+
+message MovementEvent {
+required uint32 MessageId=1;
+required uint32 ObjectIndex=2;
+required MVector3f Location=3;
+required MQuaternion4f Orientation=4;
+}
+
+message MovementEvent2 {
+required uint32 MessageId=1;
+required uint32 ObjectIndex=2;
+required float LocationX=3;
+required float LocationY=3;
+required float LocationZ=3;
+required float OrientaionX=6;
+required float OrientaionY=6;
+required float OrientaionZ=6;
+required float OrientaionW=6;
+}
+
+message ActionEvent {
+required uint32 MessageId=1;
+required string ActionName=2;
+required string ObjectId=3;
+required float EffectRadius=4;
+extensions 100 to 1000;
+}
+
+message InteractionEvent {
+required uint32 MessageId=1;
+required string InteractionName=2;
+required string SourceObjectId=3;
+required string TargetObjectId=4;
+required float EffectRadius=5;
+extensions 100 to 1000;
+}
+
+message HandoverEvent {
+required uint32 MessageId=1;
+required string SourceBubbleId=2;
+required string TargetBubbleId=3;
+required ObjectSection Object=4;
+}
+
+message SynchronizationBeginEvent {
+required uint32 MessageId=1;
+required uint32 ObjectCount=2;
+}
+
+message SynchronizationEndEvent {
+required uint32 MessageId=1;
+}

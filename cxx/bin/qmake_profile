@@ -1,0 +1,3 @@
+#!/bin/sh
+
+qmake "QMAKE_CFLAGS+=-pg" "QMAKE_CXXFLAGS+=-pg" "QMAKE_LFLAGS+=-pg" -recursive

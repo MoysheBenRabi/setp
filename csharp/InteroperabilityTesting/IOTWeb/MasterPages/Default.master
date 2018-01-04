@@ -1,0 +1,43 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Default.master.cs" Inherits="IOT.MasterPages.Default" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1" runat="server">
+    <title></title>
+    <link href="default.css" title="Default Cascading Style Sheet" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <form id="form1" runat="server" width="1100px">
+    <table class="layout-header">
+        <tr>
+            <td class="layout-header">
+                <img src="../Images/mxp_logo.png"/>            
+                </td>
+            <td class="layout-header">
+                <h2><i>Interoperability Testing Suite for Metaverse Exchange Protocol Draft Version 0.5</i></h2>
+                </td>
+            <td class="layout-header">
+            </tr>
+    </table>
+    <table class="layout-center" width="1100px">
+        <tr>
+            <td class="layout-center" width="250px">
+ 
+                <asp:Menu ID="Menu1" runat="server" DataSourceID="SiteMapDataSource1" 
+                    MaximumDynamicDisplayLevels="0" StaticDisplayLevels="4">
+                </asp:Menu>
+                <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
+ 
+            </td>
+            <td class="layout-center" width="700px">
+                <asp:ContentPlaceHolder ID="Content" runat="server">
+                
+                </asp:ContentPlaceHolder>
+            </td>
+        </tr>
+
+    </table>
+    </form>
+</body>
+</html>

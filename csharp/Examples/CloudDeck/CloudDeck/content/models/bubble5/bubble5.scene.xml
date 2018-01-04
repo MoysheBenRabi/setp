@@ -1,0 +1,4 @@
+<Model name="bubble5" geometry="models/bubble5/bubble5.geo">
+
+	<Mesh name="Mesh" material="models/bubble5/Material-Default.material.xml" batchStart="0" batchCount="23400" vertRStart="0" vertREnd="4177" />
+</Model>

@@ -1,0 +1,224 @@
+<project name="Metaverse eXchange Protocol" default="jar" basedir=".">
+    <description>
+        Java implementation of the Metaverse eXchange Protocol
+    </description>
+
+    <property name="src" location="src"/>
+    <property name="tmp" location="tmp"/>
+    <property name="lib" location="lib"/>
+    <property name="doc" location="doc"/>
+    <property name="etc" location="etc"/>
+
+    <property name="build"    location="${tmp}/classes"/>
+    <property name="coverage" location="${tmp}/coverage"/>
+
+    <path id="classpath">
+        <pathelement path="${build}"/>
+        <fileset dir="${lib}">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+
+    <taskdef resource="emma_ant.properties" classpathref="classpath"/>
+
+    <taskdef resource="checkstyletask.properties" classpathref="classpath"/>
+
+    <target name="init" description="initialize the environment">
+        <mkdir dir="${tmp}"/>
+        <mkdir dir="${build}"/>
+        <mkdir dir="${coverage}"/>
+        <mkdir dir="${doc}/javadoc"/>
+        <mkdir dir="${doc}/coverage"/>
+        <mkdir dir="${doc}/checkstyle"/>
+        <mkdir dir="${doc}/junit"/>
+    </target>
+
+    <target name="emma" description="turn on emma instrumentation">
+        <property name="emma.enabled" value="true"/>
+        <property name="emma.instr" location="${tmp}/instr"/>
+        <mkdir dir="${emma.instr}"/>
+    </target>
+
+    <target name        = "compile"
+            depends     = "init"
+            description = "compile the code">
+
+            <javac srcdir       = "${src}"
+                   destdir      = "${build}"
+                   classpathref = "classpath"
+                   target       = "1.6"
+                   source       = "1.6"
+                   encoding     = "UTF-8"
+                   debug        = "${emma.enabled}"
+            />
+    </target>
+    
+    <target name        = "jar"
+            description = "create a jar containing the compiled project code"
+            depends     = "compile">
+        <jar destfile = "${lib}/mxp.jar">
+            <fileset dir = "${build}">
+                <exclude name = "**/Test*"/>
+            </fileset>
+            <manifest>
+                <attribute name="Implementation-Vendor" value="Tyrell Corp"/>
+                <attribute name="Implementation-Title" value="MXP"/>
+                <!-- TODO: use the version number in the manifest -->
+            </manifest>
+        </jar>
+    </target>
+    
+    <target name        = "dist"
+            description = "create distributable results of the project"
+            depends     = "jar, doc">
+        <!-- first copy the distributable stuff into one location -->
+        <!-- TODO: use the version number in the directory name -->
+        <delete dir="${tmp}/dist"/>
+        <mkdir dir="${tmp}/dist/mxp"/>
+
+        <copy todir="${tmp}/dist/mxp" file="LICENSE"/>
+
+        <mkdir dir="${tmp}/dist/mxp/lib"/>
+        <copy todir="${tmp}/dist/mxp/lib" file="${lib}/mxp.jar"/>
+
+        <mkdir dir="${tmp}/dist/mxp/doc"/>
+        <copy todir="${tmp}/dist/mxp/doc" file="${doc}/agpl.txt"/>
+
+        <mkdir dir="${tmp}/dist/mxp/doc/javadoc"/>
+        <copy todir="${tmp}/dist/mxp/doc/javadoc">
+            <fileset dir="${doc}/javadoc"/>
+        </copy>
+        <!-- TODO: create readme file, etc. -->
+
+        <!-- now, create a tar.bz2 from what we want to distribute -->
+        <tar destfile    = "mxp.tar.bz2"
+             basedir     = "${tmp}/dist"
+             includes    = "mxp/**"
+             compression = "bzip2"
+        />
+
+        <!-- clean up -->
+        <delete dir="${tmp}/dist"/>
+    </target>
+
+    <target name="clean" description="clean intermediate files">
+        <delete dir="${tmp}"/>
+        <delete dir="${doc}/javadoc"/>
+        <delete dir="${doc}/coverage"/>
+        <delete dir="${doc}/checkstyle"/>
+        <delete dir="${doc}/junit"/>
+    </target>
+
+    <target name="test" depends="compile" description="run unit tests">
+        <emma enabled="${emma.enabled}">
+            <instr instrpath    = "${build}"
+                   destdir      = "${emma.instr}"
+                   metadatafile = "${coverage}/metadata.emma"
+                   merge        = "true" >
+
+                   <filter includes  = "mxp.*"
+                            excludes = "*Test*, *$?"/>
+           </instr>
+        </emma>
+
+        <junit printsummary="yes">
+            <classpath>
+                <pathelement location = "${emma.instr}"/>
+                <path        refid    = "classpath"/>
+            </classpath>
+
+            <jvmarg
+              value="-Demma.coverage.out.file=${coverage}/coverage.emma"/>
+            <jvmarg value="-Demma.coverage.out.merge=true"/>
+
+            <formatter type="xml"/>
+
+            <batchtest fork="yes" todir="${tmp}">
+                <fileset dir="${src}">
+                    <include name="**/*Test.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+
+        <junitreport todir="${doc}/junit">
+            <fileset dir="${tmp}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${doc}/junit"/>
+        </junitreport>
+
+        <emma enabled="${emma.enabled}">
+            <report sourcepath = "${src}"
+                    encoding   = "UTF-8">
+                <fileset dir="${coverage}">
+                    <include name="*.emma"/>
+                </fileset>
+
+                <html outfile="${doc}/coverage/index.html"/>
+                <xml outfile="${coverage}/coverage.xml"/>
+            </report>
+        </emma>
+    </target>
+
+    <target name        = "gen_ref_msgs"
+            description =
+                    "generate reference messages for inter-operability testing"
+            depends     = "compile">
+        <java classname    = "mxp.iot.GenerateMessages"
+              classpathref = "classpath">
+            <arg value="tmp/mxp_reference_messages.zip"/>
+        </java>
+        <echo>generated reference messages under ${tmp}/mxp_reference_messages.zip</echo>
+    </target>
+
+    <target name        = "doc"
+            description = "generate javadoc documentation"
+            depends     = "init">
+
+        <!-- copy over source files that will be documented first
+             this is needed as the javadoc tag is not that flexible
+             with exclusions
+          -->
+        <mkdir dir="${tmp}/javadoc_src"/>
+        <copy todir="${tmp}/javadoc_src">
+            <fileset dir="${src}">
+                <exclude name="**/*Test.java"/>
+            </fileset>
+        </copy>
+        
+        <!-- no document the source files -->
+        <javadoc destdir = "${doc}/javadoc"
+                 use = "true"
+                 packagenames = "mxp.*"
+                 classpathref = "classpath">
+            <packageset dir="${tmp}/javadoc_src" defaultexcludes="yes">
+                <include name="mxp/**"/>
+            </packageset>
+        </javadoc>
+        
+        <!-- at the end, remove the copied over files -->
+        <delete dir="${tmp}/javadoc_src"/>
+    </target>
+
+    <target name        = "checkstyle"
+            description = "generate checkstyle report"
+            depends     = "init" >
+
+        <checkstyle config="${etc}/sun_checks.xml" failOnViolation="false">
+            <fileset dir="${src}" includes="**/*.java"/>
+            <formatter type="xml" toFile="${tmp}/checkstyle.xml"/>
+        </checkstyle>
+
+        <xslt in      = "${tmp}/checkstyle.xml"
+              out     = "${doc}/checkstyle/index.html"
+              style   = "${etc}/checkstyle-noframes.xsl"
+        />
+    </target>
+
+    <target name        = "reports"
+            description = "generate code analysis reports &amp; documentation"
+            depends     = "doc, checkstyle"
+    />
+
+</project>
+

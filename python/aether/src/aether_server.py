@@ -1,0 +1,1 @@
+print("[[Aether Server 1.0]]")

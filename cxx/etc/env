@@ -1,0 +1,24 @@
+# set QT_HOME to the Qt installation (e.g. $QT_HOME/bin/qmake being qmake)
+# source this file from the parent dir to have the proper environment
+# currently only works on Linux
+
+OS=`uname -s | tr '[A-Z' '[a-z]'`
+ARCH=`uname -m`
+PLATFORM=$OS-$ARCH
+BASEDIR=`pwd`
+LIBDIR=$BASEDIR/lib/$PLATFORM
+
+if [ "x$QMAKESPEC" = "x" ]; then
+    case $PLATFORM in
+        linux-i686)
+            export QMAKESPEC=linux-g++-32;;
+        linux-x86_64)
+            export QMAKESPEC=linux-g++-64;;
+        darwin-i386)
+            export QMAKESPEC=macx-g++;;
+    esac
+fi
+
+export PATH=$QT_HOME/bin:$LIBDIR/bin:$PATH
+export LD_LIBRARY_PATH=$QT_HOME/lib:$BOOST_HOME/lib:$LIBDIR/lib
+

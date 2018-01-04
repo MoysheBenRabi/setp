@@ -1,0 +1,4 @@
+<Model name="bubble" geometry="models/bubble/bubble.geo">
+
+	<Mesh name="Sphere_001" material="models/bubble/bubble.material.xml" sx="1.16919" sy="0.99975" sz="1.16919" batchStart="0" batchCount="7224" vertRStart="0" vertREnd="2281" />
+</Model>

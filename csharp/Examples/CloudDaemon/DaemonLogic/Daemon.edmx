@@ -1,0 +1,849 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CloudDaemonWebModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="CloudDaemonWebModelStoreContainer">
+          <EntitySet Name="Bubble" EntityType="CloudDaemonWebModel.Store.Bubble" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BubbleLink" EntityType="CloudDaemonWebModel.Store.BubbleLink" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CloudObject" EntityType="CloudDaemonWebModel.Store.CloudObject" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LocalProcess" EntityType="CloudDaemonWebModel.Store.LocalProcess" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LocalProcessState" EntityType="CloudDaemonWebModel.Store.LocalProcessState" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ObjectType" EntityType="CloudDaemonWebModel.Store.ObjectType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Participant" EntityType="CloudDaemonWebModel.Store.Participant" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RemoteProcess" EntityType="CloudDaemonWebModel.Store.RemoteProcess" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="CloudDaemonWebModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Bubble_LocalProcess" Association="CloudDaemonWebModel.Store.FK_Bubble_LocalProcess">
+            <End Role="LocalProcess" EntitySet="LocalProcess" />
+            <End Role="Bubble" EntitySet="Bubble" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bubble_Participant" Association="CloudDaemonWebModel.Store.FK_Bubble_Participant">
+            <End Role="Participant" EntitySet="Participant" />
+            <End Role="Bubble" EntitySet="Bubble" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BubbleLink_Bubble" Association="CloudDaemonWebModel.Store.FK_BubbleLink_Bubble">
+            <End Role="Bubble" EntitySet="Bubble" />
+            <End Role="BubbleLink" EntitySet="BubbleLink" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CloudObject_Bubble" Association="CloudDaemonWebModel.Store.FK_CloudObject_Bubble">
+            <End Role="Bubble" EntitySet="Bubble" />
+            <End Role="CloudObject" EntitySet="CloudObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CloudObject_CloudObject" Association="CloudDaemonWebModel.Store.FK_CloudObject_CloudObject">
+            <End Role="CloudObject" EntitySet="CloudObject" />
+            <End Role="CloudObject1" EntitySet="CloudObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CloudObject_ObjectType" Association="CloudDaemonWebModel.Store.FK_CloudObject_ObjectType">
+            <End Role="ObjectType" EntitySet="ObjectType" />
+            <End Role="CloudObject" EntitySet="CloudObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CloudObject_Participant1" Association="CloudDaemonWebModel.Store.FK_CloudObject_Participant1">
+            <End Role="Participant" EntitySet="Participant" />
+            <End Role="CloudObject" EntitySet="CloudObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocalProcess_Participant" Association="CloudDaemonWebModel.Store.FK_LocalProcess_Participant">
+            <End Role="Participant" EntitySet="Participant" />
+            <End Role="LocalProcess" EntitySet="LocalProcess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocalProcessState_LocalProcess" Association="CloudDaemonWebModel.Store.FK_LocalProcessState_LocalProcess">
+            <End Role="LocalProcess" EntitySet="LocalProcess" />
+            <End Role="LocalProcessState" EntitySet="LocalProcessState" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocalProcessState_Participant" Association="CloudDaemonWebModel.Store.FK_LocalProcessState_Participant">
+            <End Role="Participant" EntitySet="Participant" />
+            <End Role="LocalProcessState" EntitySet="LocalProcessState" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObjectType_Participant" Association="CloudDaemonWebModel.Store.FK_ObjectType_Participant">
+            <End Role="Participant" EntitySet="Participant" />
+            <End Role="ObjectType" EntitySet="ObjectType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participant_User" Association="CloudDaemonWebModel.Store.FK_Participant_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Participant" EntitySet="Participant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RemoteProcess_LocalProcess" Association="CloudDaemonWebModel.Store.FK_RemoteProcess_LocalProcess">
+            <End Role="LocalProcess" EntitySet="LocalProcess" />
+            <End Role="RemoteProcess" EntitySet="RemoteProcess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RemoteProcess_Participant" Association="CloudDaemonWebModel.Store.FK_RemoteProcess_Participant">
+            <End Role="Participant" EntitySet="Participant" />
+            <End Role="RemoteProcess" EntitySet="RemoteProcess" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Bubble">
+          <Key>
+            <PropertyRef Name="BubbleId" />
+          </Key>
+          <Property Name="BubbleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OwnerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LocalProcessId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="Range" Type="float" Nullable="false" />
+          <Property Name="PerceptionRange" Type="float" Nullable="false" />
+          <Property Name="Published" Type="bit" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BubbleLink">
+          <Key>
+            <PropertyRef Name="BubbleLinkId" />
+          </Key>
+          <Property Name="BubbleLinkId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BubbleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="1024" />
+          <Property Name="RemoteBubbleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Address" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="Port" Type="int" Nullable="false" />
+          <Property Name="X" Type="float" Nullable="false" />
+          <Property Name="Y" Type="float" Nullable="false" />
+          <Property Name="Z" Type="float" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CloudObject">
+          <Key>
+            <PropertyRef Name="CloudObjectId" />
+          </Key>
+          <Property Name="CloudObjectId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentId" Type="uniqueidentifier" />
+          <Property Name="BubbleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OwnerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ObjectTypeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="X" Type="float" Nullable="false" />
+          <Property Name="Y" Type="float" Nullable="false" />
+          <Property Name="Z" Type="float" Nullable="false" />
+          <Property Name="OX" Type="float" Nullable="false" />
+          <Property Name="OY" Type="float" Nullable="false" />
+          <Property Name="OZ" Type="float" Nullable="false" />
+          <Property Name="OW" Type="float" Nullable="false" />
+          <Property Name="Radius" Type="float" Nullable="false" />
+          <Property Name="Mass" Type="float" Nullable="false" />
+          <Property Name="ModelUrl" Type="varchar" Nullable="false" MaxLength="1024" />
+          <Property Name="ModelScale" Type="float" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Modified" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LocalProcess">
+          <Key>
+            <PropertyRef Name="LocalProcessId" />
+          </Key>
+          <Property Name="LocalProcessId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OwnerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="1024" />
+          <Property Name="Address" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="ServerPort" Type="int" Nullable="false" />
+          <Property Name="HubPort" Type="int" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LocalProcessState">
+          <Key>
+            <PropertyRef Name="LocalProcessStateId" />
+          </Key>
+          <Property Name="LocalProcessStateId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LocalProcessId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OwnerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Modified" Type="datetime" Nullable="false" />
+          <Property Name="Cpu" Type="float" Nullable="false" />
+          <Property Name="Mem" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ObjectType">
+          <Key>
+            <PropertyRef Name="ObjectTypeId" />
+          </Key>
+          <Property Name="ObjectTypeId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OwnerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="Radius" Type="float" Nullable="false" />
+          <Property Name="Mass" Type="float" Nullable="false" />
+          <Property Name="ModelUrl" Type="varchar" Nullable="false" MaxLength="1024" />
+          <Property Name="ModelScale" Type="float" Nullable="false" />
+          <Property Name="Published" Type="bit" />
+        </EntityType>
+        <EntityType Name="Participant">
+          <Key>
+            <PropertyRef Name="ParticipantId" />
+          </Key>
+          <Property Name="ParticipantId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="OpenIdUrl" Type="varchar" Nullable="false" MaxLength="1024" />
+          <Property Name="LoginSecret" Type="varchar" MaxLength="1024" />
+          <Property Name="LoginSecretExpires" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RemoteProcess">
+          <Key>
+            <PropertyRef Name="RemoteProcessId" />
+          </Key>
+          <Property Name="RemoteProcessId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LocalProcessId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OwnerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Address" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="HubPort" Type="int" Nullable="false" />
+          <Property Name="Trusted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="EmailAddressVerified" Type="bit" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Bubble_LocalProcess">
+          <End Role="LocalProcess" Type="CloudDaemonWebModel.Store.LocalProcess" Multiplicity="1" />
+          <End Role="Bubble" Type="CloudDaemonWebModel.Store.Bubble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocalProcess">
+              <PropertyRef Name="LocalProcessId" />
+            </Principal>
+            <Dependent Role="Bubble">
+              <PropertyRef Name="LocalProcessId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bubble_Participant">
+          <End Role="Participant" Type="CloudDaemonWebModel.Store.Participant" Multiplicity="1" />
+          <End Role="Bubble" Type="CloudDaemonWebModel.Store.Bubble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participant">
+              <PropertyRef Name="ParticipantId" />
+            </Principal>
+            <Dependent Role="Bubble">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BubbleLink_Bubble">
+          <End Role="Bubble" Type="CloudDaemonWebModel.Store.Bubble" Multiplicity="1" />
+          <End Role="BubbleLink" Type="CloudDaemonWebModel.Store.BubbleLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bubble">
+              <PropertyRef Name="BubbleId" />
+            </Principal>
+            <Dependent Role="BubbleLink">
+              <PropertyRef Name="BubbleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CloudObject_Bubble">
+          <End Role="Bubble" Type="CloudDaemonWebModel.Store.Bubble" Multiplicity="1" />
+          <End Role="CloudObject" Type="CloudDaemonWebModel.Store.CloudObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bubble">
+              <PropertyRef Name="BubbleId" />
+            </Principal>
+            <Dependent Role="CloudObject">
+              <PropertyRef Name="BubbleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CloudObject_CloudObject">
+          <End Role="CloudObject" Type="CloudDaemonWebModel.Store.CloudObject" Multiplicity="0..1" />
+          <End Role="CloudObject1" Type="CloudDaemonWebModel.Store.CloudObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CloudObject">
+              <PropertyRef Name="CloudObjectId" />
+            </Principal>
+            <Dependent Role="CloudObject1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CloudObject_ObjectType">
+          <End Role="ObjectType" Type="CloudDaemonWebModel.Store.ObjectType" Multiplicity="1" />
+          <End Role="CloudObject" Type="CloudDaemonWebModel.Store.CloudObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ObjectType">
+              <PropertyRef Name="ObjectTypeId" />
+            </Principal>
+            <Dependent Role="CloudObject">
+              <PropertyRef Name="ObjectTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CloudObject_Participant1">
+          <End Role="Participant" Type="CloudDaemonWebModel.Store.Participant" Multiplicity="1" />
+          <End Role="CloudObject" Type="CloudDaemonWebModel.Store.CloudObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participant">
+              <PropertyRef Name="ParticipantId" />
+            </Principal>
+            <Dependent Role="CloudObject">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocalProcess_Participant">
+          <End Role="Participant" Type="CloudDaemonWebModel.Store.Participant" Multiplicity="1" />
+          <End Role="LocalProcess" Type="CloudDaemonWebModel.Store.LocalProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participant">
+              <PropertyRef Name="ParticipantId" />
+            </Principal>
+            <Dependent Role="LocalProcess">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocalProcessState_LocalProcess">
+          <End Role="LocalProcess" Type="CloudDaemonWebModel.Store.LocalProcess" Multiplicity="1" />
+          <End Role="LocalProcessState" Type="CloudDaemonWebModel.Store.LocalProcessState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocalProcess">
+              <PropertyRef Name="LocalProcessId" />
+            </Principal>
+            <Dependent Role="LocalProcessState">
+              <PropertyRef Name="LocalProcessId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocalProcessState_Participant">
+          <End Role="Participant" Type="CloudDaemonWebModel.Store.Participant" Multiplicity="1" />
+          <End Role="LocalProcessState" Type="CloudDaemonWebModel.Store.LocalProcessState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participant">
+              <PropertyRef Name="ParticipantId" />
+            </Principal>
+            <Dependent Role="LocalProcessState">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObjectType_Participant">
+          <End Role="Participant" Type="CloudDaemonWebModel.Store.Participant" Multiplicity="1" />
+          <End Role="ObjectType" Type="CloudDaemonWebModel.Store.ObjectType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participant">
+              <PropertyRef Name="ParticipantId" />
+            </Principal>
+            <Dependent Role="ObjectType">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participant_User">
+          <End Role="User" Type="CloudDaemonWebModel.Store.User" Multiplicity="0..1" />
+          <End Role="Participant" Type="CloudDaemonWebModel.Store.Participant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Participant">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RemoteProcess_LocalProcess">
+          <End Role="LocalProcess" Type="CloudDaemonWebModel.Store.LocalProcess" Multiplicity="1" />
+          <End Role="RemoteProcess" Type="CloudDaemonWebModel.Store.RemoteProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocalProcess">
+              <PropertyRef Name="LocalProcessId" />
+            </Principal>
+            <Dependent Role="RemoteProcess">
+              <PropertyRef Name="LocalProcessId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RemoteProcess_Participant">
+          <End Role="Participant" Type="CloudDaemonWebModel.Store.Participant" Multiplicity="1" />
+          <End Role="RemoteProcess" Type="CloudDaemonWebModel.Store.RemoteProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participant">
+              <PropertyRef Name="ParticipantId" />
+            </Principal>
+            <Dependent Role="RemoteProcess">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CloudDaemonWebModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="DaemonEntities">
+          <EntitySet Name="OpenIdUser" EntityType="CloudDaemonWebModel.OpenIdUser" />
+          <EntitySet Name="Bubble" EntityType="CloudDaemonWebModel.Bubble" />
+          <EntitySet Name="BubbleLink" EntityType="CloudDaemonWebModel.BubbleLink" />
+          <EntitySet Name="CloudObject" EntityType="CloudDaemonWebModel.CloudObject" />
+          <EntitySet Name="LocalProcess" EntityType="CloudDaemonWebModel.LocalProcess" />
+          <EntitySet Name="ObjectType" EntityType="CloudDaemonWebModel.ObjectType" />
+          <EntitySet Name="Participant" EntityType="CloudDaemonWebModel.Participant" />
+          <EntitySet Name="RemoteProcess" EntityType="CloudDaemonWebModel.RemoteProcess" />
+          <AssociationSet Name="FK_Bubble_LocalProcess" Association="CloudDaemonWebModel.FK_Bubble_LocalProcess">
+            <End EntitySet="LocalProcess" Role="LocalProcess" />
+            <End EntitySet="Bubble" Role="Bubble" /></AssociationSet>
+          <AssociationSet Name="FK_BubbleLink_Bubble" Association="CloudDaemonWebModel.FK_BubbleLink_Bubble">
+            <End Role="Bubble" EntitySet="Bubble" />
+            <End Role="BubbleLink" EntitySet="BubbleLink" /></AssociationSet>
+          <AssociationSet Name="FK_CloudObject_Bubble" Association="CloudDaemonWebModel.FK_CloudObject_Bubble">
+            <End Role="Bubble" EntitySet="Bubble" />
+            <End Role="CloudObject" EntitySet="CloudObject" /></AssociationSet>
+          <AssociationSet Name="FK_CloudObject_ObjectType" Association="CloudDaemonWebModel.FK_CloudObject_ObjectType">
+            <End Role="ObjectType" EntitySet="ObjectType" />
+            <End Role="CloudObject" EntitySet="CloudObject" /></AssociationSet>
+          <AssociationSet Name="FK_CloudObject_Participant1" Association="CloudDaemonWebModel.FK_CloudObject_Participant1">
+            <End Role="Participant" EntitySet="Participant" />
+            <End Role="CloudObject" EntitySet="CloudObject" /></AssociationSet>
+          <AssociationSet Name="FK_LocalProcess_Participant" Association="CloudDaemonWebModel.FK_LocalProcess_Participant">
+            <End EntitySet="Participant" Role="Participant" />
+            <End EntitySet="LocalProcess" Role="LocalProcess" /></AssociationSet>
+          <AssociationSet Name="FK_RemoteProcess_LocalProcess" Association="CloudDaemonWebModel.FK_RemoteProcess_LocalProcess">
+            <End EntitySet="LocalProcess" Role="LocalProcess" />
+            <End EntitySet="RemoteProcess" Role="RemoteProcess" /></AssociationSet>
+          <AssociationSet Name="FK_Participant_User" Association="CloudDaemonWebModel.FK_Participant_User">
+            <End Role="User" EntitySet="OpenIdUser" />
+            <End Role="Participant" EntitySet="Participant" /></AssociationSet>
+          <AssociationSet Name="FK_Bubble_Participant" Association="CloudDaemonWebModel.FK_Bubble_Participant">
+            <End Role="Participant" EntitySet="Participant" />
+            <End Role="Bubble" EntitySet="Bubble" /></AssociationSet>
+          <AssociationSet Name="FK_RemoteProcess_Participant" Association="CloudDaemonWebModel.FK_RemoteProcess_Participant">
+            <End Role="Participant" EntitySet="Participant" />
+            <End Role="RemoteProcess" EntitySet="RemoteProcess" /></AssociationSet>
+          <EntitySet Name="LocalProcessState" EntityType="CloudDaemonWebModel.LocalProcessState" />
+          <AssociationSet Name="FK_LocalProcessState_LocalProcess" Association="CloudDaemonWebModel.FK_LocalProcessState_LocalProcess">
+            <End Role="LocalProcess" EntitySet="LocalProcess" />
+            <End Role="LocalProcessState" EntitySet="LocalProcessState" /></AssociationSet>
+          <AssociationSet Name="FK_LocalProcessState_Participant" Association="CloudDaemonWebModel.FK_LocalProcessState_Participant">
+            <End Role="Participant" EntitySet="Participant" />
+            <End Role="LocalProcessState" EntitySet="LocalProcessState" /></AssociationSet>
+          <AssociationSet Name="FK_ObjectType_Participant" Association="CloudDaemonWebModel.FK_ObjectType_Participant">
+            <End Role="Participant" EntitySet="Participant" />
+            <End Role="ObjectType" EntitySet="ObjectType" /></AssociationSet>
+          <AssociationSet Name="FK_CloudObject_CloudObject" Association="CloudDaemonWebModel.FK_CloudObject_CloudObject">
+            <End Role="CloudObject" EntitySet="CloudObject" />
+            <End Role="CloudObject1" EntitySet="CloudObject" /></AssociationSet></EntityContainer>
+        <EntityType Name="OpenIdUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="EmailAddressVerified" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Participant" Relationship="CloudDaemonWebModel.FK_Participant_User" FromRole="User" ToRole="Participant" /></EntityType>
+        <EntityType Name="Bubble">
+          <Key>
+            <PropertyRef Name="BubbleId" /></Key>
+          <Property Name="BubbleId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Range" Type="Double" Nullable="false" />
+          <Property Name="PerceptionRange" Type="Double" Nullable="false" />
+          <NavigationProperty Name="LocalProcess" Relationship="CloudDaemonWebModel.FK_Bubble_LocalProcess" FromRole="Bubble" ToRole="LocalProcess" />
+          <NavigationProperty Name="BubbleLink" Relationship="CloudDaemonWebModel.FK_BubbleLink_Bubble" FromRole="Bubble" ToRole="BubbleLink" />
+          <NavigationProperty Name="CloudObject" Relationship="CloudDaemonWebModel.FK_CloudObject_Bubble" FromRole="Bubble" ToRole="CloudObject" />
+          <NavigationProperty Name="Participant" Relationship="CloudDaemonWebModel.FK_Bubble_Participant" FromRole="Bubble" ToRole="Participant" />
+          <Property Name="Published" Type="Boolean" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" /></EntityType>
+        <EntityType Name="BubbleLink">
+          <Key>
+            <PropertyRef Name="BubbleLinkId" /></Key>
+          <Property Name="BubbleLinkId" Type="Guid" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" />
+          <Property Name="Port" Type="Int32" Nullable="false" />
+          <Property Name="X" Type="Double" Nullable="false" />
+          <Property Name="Y" Type="Double" Nullable="false" />
+          <Property Name="Z" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Bubble" Relationship="CloudDaemonWebModel.FK_BubbleLink_Bubble" FromRole="BubbleLink" ToRole="Bubble" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="RemoteBubbleId" Type="Guid" Nullable="false" /></EntityType>
+        <EntityType Name="CloudObject">
+          <Key>
+            <PropertyRef Name="CloudObjectId" /></Key>
+          <Property Name="CloudObjectId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="X" Type="Double" Nullable="false" />
+          <Property Name="Y" Type="Double" Nullable="false" />
+          <Property Name="Z" Type="Double" Nullable="false" />
+          <Property Name="Radius" Type="Double" Nullable="false" />
+          <Property Name="Mass" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Bubble" Relationship="CloudDaemonWebModel.FK_CloudObject_Bubble" FromRole="CloudObject" ToRole="Bubble" />
+          <NavigationProperty Name="ObjectType" Relationship="CloudDaemonWebModel.FK_CloudObject_ObjectType" FromRole="CloudObject" ToRole="ObjectType" />
+          <NavigationProperty Name="Participant" Relationship="CloudDaemonWebModel.FK_CloudObject_Participant1" FromRole="CloudObject" ToRole="Participant" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="ModelUrl" Type="String" Nullable="false" />
+          <Property Name="ModelScale" Type="Double" Nullable="false" />
+          <Property Name="OX" Type="Double" Nullable="false" />
+          <Property Name="OY" Type="Double" Nullable="false" />
+          <Property Name="OZ" Type="Double" Nullable="false" />
+          <Property Name="OW" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Children" Relationship="CloudDaemonWebModel.FK_CloudObject_CloudObject" FromRole="CloudObject" ToRole="CloudObject1" />
+          <NavigationProperty Name="Parent" Relationship="CloudDaemonWebModel.FK_CloudObject_CloudObject" FromRole="CloudObject1" ToRole="CloudObject" />
+          <Property Name="Created" Type="DateTime" Nullable="false" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" /></EntityType>
+        <EntityType Name="LocalProcess">
+          <Key>
+            <PropertyRef Name="LocalProcessId" /></Key>
+          <Property Name="LocalProcessId" Type="Guid" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" />
+          <NavigationProperty Name="Bubble" Relationship="CloudDaemonWebModel.FK_Bubble_LocalProcess" FromRole="LocalProcess" ToRole="Bubble" />
+          <NavigationProperty Name="Participant" Relationship="CloudDaemonWebModel.FK_LocalProcess_Participant" FromRole="LocalProcess" ToRole="Participant" />
+          <NavigationProperty Name="RemoteProcess" Relationship="CloudDaemonWebModel.FK_RemoteProcess_LocalProcess" FromRole="LocalProcess" ToRole="RemoteProcess" />
+          <Property Name="ServerPort" Type="Int32" Nullable="false" />
+          <Property Name="HubPort" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LocalProcessState" Relationship="CloudDaemonWebModel.FK_LocalProcessState_LocalProcess" FromRole="LocalProcess" ToRole="LocalProcessState" /></EntityType>
+        <EntityType Name="ObjectType">
+          <Key>
+            <PropertyRef Name="ObjectTypeId" /></Key>
+          <Property Name="ObjectTypeId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="CloudObject" Relationship="CloudDaemonWebModel.FK_CloudObject_ObjectType" FromRole="ObjectType" ToRole="CloudObject" />
+          <Property Name="Radius" Type="Double" Nullable="false" />
+          <Property Name="Mass" Type="Double" Nullable="false" />
+          <Property Name="ModelUrl" Type="String" Nullable="false" />
+          <Property Name="ModelScale" Type="Double" Nullable="false" />
+          <Property Name="Published" Type="Boolean" Nullable="true" />
+          <NavigationProperty Name="Participant" Relationship="CloudDaemonWebModel.FK_ObjectType_Participant" FromRole="ObjectType" ToRole="Participant" /></EntityType>
+        <EntityType Name="Participant">
+          <Key>
+            <PropertyRef Name="ParticipantId" /></Key>
+          <Property Name="ParticipantId" Type="Guid" Nullable="false" />
+          <Property Name="OpenIdUrl" Type="String" Nullable="false" />
+          <NavigationProperty Name="CloudObject" Relationship="CloudDaemonWebModel.FK_CloudObject_Participant1" FromRole="Participant" ToRole="CloudObject" />
+          <NavigationProperty Name="LocalProcess" Relationship="CloudDaemonWebModel.FK_LocalProcess_Participant" FromRole="Participant" ToRole="LocalProcess" />
+          <NavigationProperty Name="User" Relationship="CloudDaemonWebModel.FK_Participant_User" FromRole="Participant" ToRole="User" />
+          <NavigationProperty Name="Bubble" Relationship="CloudDaemonWebModel.FK_Bubble_Participant" FromRole="Participant" ToRole="Bubble" />
+          <NavigationProperty Name="RemoteProcess" Relationship="CloudDaemonWebModel.FK_RemoteProcess_Participant" FromRole="Participant" ToRole="RemoteProcess" />
+          <Property Name="LoginSecret" Type="String" Nullable="true" />
+          <Property Name="LoginSecretExpires" Type="DateTime" Nullable="true" />
+          <NavigationProperty Name="LocalProcessState" Relationship="CloudDaemonWebModel.FK_LocalProcessState_Participant" FromRole="Participant" ToRole="LocalProcessState" />
+          <NavigationProperty Name="ObjectType" Relationship="CloudDaemonWebModel.FK_ObjectType_Participant" FromRole="Participant" ToRole="ObjectType" /></EntityType>
+        <EntityType Name="RemoteProcess">
+          <Key>
+            <PropertyRef Name="RemoteProcessId" /></Key>
+          <Property Name="RemoteProcessId" Type="Guid" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" />
+          <Property Name="Trusted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LocalProcess" Relationship="CloudDaemonWebModel.FK_RemoteProcess_LocalProcess" FromRole="RemoteProcess" ToRole="LocalProcess" />
+          <Property Name="HubPort" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Participant" Relationship="CloudDaemonWebModel.FK_RemoteProcess_Participant" FromRole="RemoteProcess" ToRole="Participant" /></EntityType>
+        <Association Name="FK_Bubble_LocalProcess">
+          <End Type="CloudDaemonWebModel.LocalProcess" Multiplicity="1" Role="LocalProcess" />
+          <End Type="CloudDaemonWebModel.Bubble" Multiplicity="*" Role="Bubble" /></Association>
+        <Association Name="FK_BubbleLink_Bubble">
+          <End Type="CloudDaemonWebModel.Bubble" Role="Bubble" Multiplicity="1" />
+          <End Type="CloudDaemonWebModel.BubbleLink" Role="BubbleLink" Multiplicity="*" /></Association>
+        <Association Name="FK_CloudObject_Bubble">
+          <End Type="CloudDaemonWebModel.Bubble" Role="Bubble" Multiplicity="1" />
+          <End Type="CloudDaemonWebModel.CloudObject" Role="CloudObject" Multiplicity="*" /></Association>
+        <Association Name="FK_CloudObject_ObjectType">
+          <End Type="CloudDaemonWebModel.ObjectType" Role="ObjectType" Multiplicity="1" />
+          <End Type="CloudDaemonWebModel.CloudObject" Role="CloudObject" Multiplicity="*" /></Association>
+        <Association Name="FK_CloudObject_Participant1">
+          <End Type="CloudDaemonWebModel.Participant" Role="Participant" Multiplicity="1" />
+          <End Type="CloudDaemonWebModel.CloudObject" Role="CloudObject" Multiplicity="*" /></Association>
+        <Association Name="FK_LocalProcess_Participant">
+          <End Type="CloudDaemonWebModel.Participant" Multiplicity="1" Role="Participant" />
+          <End Type="CloudDaemonWebModel.LocalProcess" Multiplicity="*" Role="LocalProcess" /></Association>
+        <Association Name="FK_RemoteProcess_LocalProcess">
+          <End Type="CloudDaemonWebModel.LocalProcess" Multiplicity="1" Role="LocalProcess" />
+          <End Type="CloudDaemonWebModel.RemoteProcess" Multiplicity="*" Role="RemoteProcess" /></Association>
+        <Association Name="FK_Participant_User">
+          <End Type="CloudDaemonWebModel.OpenIdUser" Role="User" Multiplicity="1" />
+          <End Type="CloudDaemonWebModel.Participant" Role="Participant" Multiplicity="*" /></Association>
+        <Association Name="FK_Bubble_Participant">
+          <End Type="CloudDaemonWebModel.Participant" Role="Participant" Multiplicity="1" />
+          <End Type="CloudDaemonWebModel.Bubble" Role="Bubble" Multiplicity="*" /></Association>
+        <Association Name="FK_RemoteProcess_Participant">
+          <End Type="CloudDaemonWebModel.Participant" Role="Participant" Multiplicity="1" />
+          <End Type="CloudDaemonWebModel.RemoteProcess" Role="RemoteProcess" Multiplicity="*" /></Association>
+        <EntityType Name="LocalProcessState">
+          <Key>
+            <PropertyRef Name="LocalProcessStateId" /></Key>
+          <Property Name="LocalProcessStateId" Type="Guid" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" />
+          <Property Name="Cpu" Type="Double" Nullable="false" />
+          <Property Name="Mem" Type="Double" Nullable="false" />
+          <NavigationProperty Name="LocalProcess" Relationship="CloudDaemonWebModel.FK_LocalProcessState_LocalProcess" FromRole="LocalProcessState" ToRole="LocalProcess" />
+          <NavigationProperty Name="Participant" Relationship="CloudDaemonWebModel.FK_LocalProcessState_Participant" FromRole="LocalProcessState" ToRole="Participant" /></EntityType>
+        <Association Name="FK_LocalProcessState_LocalProcess">
+          <End Type="CloudDaemonWebModel.LocalProcess" Role="LocalProcess" Multiplicity="1" />
+          <End Type="CloudDaemonWebModel.LocalProcessState" Role="LocalProcessState" Multiplicity="*" /></Association>
+        <Association Name="FK_LocalProcessState_Participant">
+          <End Type="CloudDaemonWebModel.Participant" Role="Participant" Multiplicity="1" />
+          <End Type="CloudDaemonWebModel.LocalProcessState" Role="LocalProcessState" Multiplicity="*" /></Association>
+        <Association Name="FK_ObjectType_Participant">
+          <End Type="CloudDaemonWebModel.Participant" Role="Participant" Multiplicity="1" />
+          <End Type="CloudDaemonWebModel.ObjectType" Role="ObjectType" Multiplicity="*" /></Association>
+        <Association Name="FK_CloudObject_CloudObject">
+          <End Type="CloudDaemonWebModel.CloudObject" Role="CloudObject" Multiplicity="0..1" />
+          <End Type="CloudDaemonWebModel.CloudObject" Role="CloudObject1" Multiplicity="*" /></Association></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="CloudDaemonWebModelStoreContainer" CdmEntityContainer="DaemonEntities">
+          <EntitySetMapping Name="OpenIdUser">
+            <EntityTypeMapping TypeName="IsTypeOf(CloudDaemonWebModel.OpenIdUser)">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="EmailAddressVerified" ColumnName="EmailAddressVerified" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bubble">
+            <EntityTypeMapping TypeName="IsTypeOf(CloudDaemonWebModel.Bubble)">
+              <MappingFragment StoreEntitySet="Bubble">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="PerceptionRange" ColumnName="PerceptionRange" />
+                <ScalarProperty Name="Range" ColumnName="Range" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BubbleId" ColumnName="BubbleId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="BubbleLink">
+            <EntityTypeMapping TypeName="IsTypeOf(CloudDaemonWebModel.BubbleLink)">
+              <MappingFragment StoreEntitySet="BubbleLink">
+                <ScalarProperty Name="RemoteBubbleId" ColumnName="RemoteBubbleId" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Z" ColumnName="Z" />
+                <ScalarProperty Name="Y" ColumnName="Y" />
+                <ScalarProperty Name="X" ColumnName="X" />
+                <ScalarProperty Name="Port" ColumnName="Port" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="BubbleLinkId" ColumnName="BubbleLinkId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="CloudObject">
+            <EntityTypeMapping TypeName="IsTypeOf(CloudDaemonWebModel.CloudObject)">
+              <MappingFragment StoreEntitySet="CloudObject">
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="OW" ColumnName="OW" />
+                <ScalarProperty Name="OZ" ColumnName="OZ" />
+                <ScalarProperty Name="OY" ColumnName="OY" />
+                <ScalarProperty Name="OX" ColumnName="OX" />
+                <ScalarProperty Name="ModelScale" ColumnName="ModelScale" />
+                <ScalarProperty Name="ModelUrl" ColumnName="ModelUrl" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Mass" ColumnName="Mass" />
+                <ScalarProperty Name="Radius" ColumnName="Radius" />
+                <ScalarProperty Name="Z" ColumnName="Z" />
+                <ScalarProperty Name="Y" ColumnName="Y" />
+                <ScalarProperty Name="X" ColumnName="X" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CloudObjectId" ColumnName="CloudObjectId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="LocalProcess">
+            <EntityTypeMapping TypeName="IsTypeOf(CloudDaemonWebModel.LocalProcess)">
+              <MappingFragment StoreEntitySet="LocalProcess">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="HubPort" ColumnName="HubPort" />
+                <ScalarProperty Name="ServerPort" ColumnName="ServerPort" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="LocalProcessId" ColumnName="LocalProcessId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ObjectType">
+            <EntityTypeMapping TypeName="IsTypeOf(CloudDaemonWebModel.ObjectType)">
+              <MappingFragment StoreEntitySet="ObjectType">
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="ModelScale" ColumnName="ModelScale" />
+                <ScalarProperty Name="ModelUrl" ColumnName="ModelUrl" />
+                <ScalarProperty Name="Mass" ColumnName="Mass" />
+                <ScalarProperty Name="Radius" ColumnName="Radius" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ObjectTypeId" ColumnName="ObjectTypeId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Participant">
+            <EntityTypeMapping TypeName="IsTypeOf(CloudDaemonWebModel.Participant)">
+              <MappingFragment StoreEntitySet="Participant">
+                <ScalarProperty Name="LoginSecretExpires" ColumnName="LoginSecretExpires" />
+                <ScalarProperty Name="LoginSecret" ColumnName="LoginSecret" />
+                <ScalarProperty Name="OpenIdUrl" ColumnName="OpenIdUrl" />
+                <ScalarProperty Name="ParticipantId" ColumnName="ParticipantId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="RemoteProcess">
+            <EntityTypeMapping TypeName="IsTypeOf(CloudDaemonWebModel.RemoteProcess)">
+              <MappingFragment StoreEntitySet="RemoteProcess">
+                <ScalarProperty Name="HubPort" ColumnName="HubPort" />
+                <ScalarProperty Name="Trusted" ColumnName="Trusted" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="RemoteProcessId" ColumnName="RemoteProcessId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="FK_Bubble_LocalProcess" TypeName="CloudDaemonWebModel.FK_Bubble_LocalProcess" StoreEntitySet="Bubble">
+            <EndProperty Name="Bubble">
+              <ScalarProperty Name="BubbleId" ColumnName="BubbleId" /></EndProperty>
+            <EndProperty Name="LocalProcess">
+              <ScalarProperty Name="LocalProcessId" ColumnName="LocalProcessId" /></EndProperty></AssociationSetMapping>
+          <AssociationSetMapping Name="FK_BubbleLink_Bubble" TypeName="CloudDaemonWebModel.FK_BubbleLink_Bubble" StoreEntitySet="BubbleLink">
+            <EndProperty Name="BubbleLink">
+              <ScalarProperty Name="BubbleLinkId" ColumnName="BubbleLinkId" /></EndProperty>
+            <EndProperty Name="Bubble">
+              <ScalarProperty Name="BubbleId" ColumnName="BubbleId" /></EndProperty></AssociationSetMapping>
+          <AssociationSetMapping Name="FK_CloudObject_Bubble" TypeName="CloudDaemonWebModel.FK_CloudObject_Bubble" StoreEntitySet="CloudObject">
+            <EndProperty Name="CloudObject">
+              <ScalarProperty Name="CloudObjectId" ColumnName="CloudObjectId" /></EndProperty>
+            <EndProperty Name="Bubble">
+              <ScalarProperty Name="BubbleId" ColumnName="BubbleId" /></EndProperty></AssociationSetMapping>
+          <AssociationSetMapping Name="FK_CloudObject_ObjectType" TypeName="CloudDaemonWebModel.FK_CloudObject_ObjectType" StoreEntitySet="CloudObject">
+            <EndProperty Name="CloudObject">
+              <ScalarProperty Name="CloudObjectId" ColumnName="CloudObjectId" /></EndProperty>
+            <EndProperty Name="ObjectType">
+              <ScalarProperty Name="ObjectTypeId" ColumnName="ObjectTypeId" /></EndProperty></AssociationSetMapping>
+          <AssociationSetMapping Name="FK_CloudObject_Participant1" TypeName="CloudDaemonWebModel.FK_CloudObject_Participant1" StoreEntitySet="CloudObject">
+            <EndProperty Name="CloudObject">
+              <ScalarProperty Name="CloudObjectId" ColumnName="CloudObjectId" /></EndProperty>
+            <EndProperty Name="Participant">
+              <ScalarProperty Name="ParticipantId" ColumnName="OwnerId" /></EndProperty></AssociationSetMapping>
+          <AssociationSetMapping Name="FK_LocalProcess_Participant" TypeName="CloudDaemonWebModel.FK_LocalProcess_Participant" StoreEntitySet="LocalProcess">
+            <EndProperty Name="LocalProcess">
+              <ScalarProperty Name="LocalProcessId" ColumnName="LocalProcessId" /></EndProperty>
+            <EndProperty Name="Participant">
+              <ScalarProperty Name="ParticipantId" ColumnName="OwnerId" /></EndProperty></AssociationSetMapping>
+          <AssociationSetMapping Name="FK_RemoteProcess_LocalProcess" TypeName="CloudDaemonWebModel.FK_RemoteProcess_LocalProcess" StoreEntitySet="RemoteProcess">
+            <EndProperty Name="RemoteProcess">
+              <ScalarProperty Name="RemoteProcessId" ColumnName="RemoteProcessId" /></EndProperty>
+            <EndProperty Name="LocalProcess">
+              <ScalarProperty Name="LocalProcessId" ColumnName="LocalProcessId" /></EndProperty></AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Participant_User" TypeName="CloudDaemonWebModel.FK_Participant_User" StoreEntitySet="Participant">
+            <EndProperty Name="Participant">
+              <ScalarProperty Name="ParticipantId" ColumnName="ParticipantId" /></EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="UserId" ColumnName="UserId" /></EndProperty>
+            </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Bubble_Participant" TypeName="CloudDaemonWebModel.FK_Bubble_Participant" StoreEntitySet="Bubble">
+            <EndProperty Name="Bubble">
+              <ScalarProperty Name="BubbleId" ColumnName="BubbleId" /></EndProperty>
+            <EndProperty Name="Participant">
+              <ScalarProperty Name="ParticipantId" ColumnName="OwnerId" /></EndProperty></AssociationSetMapping>
+          <AssociationSetMapping Name="FK_RemoteProcess_Participant" TypeName="CloudDaemonWebModel.FK_RemoteProcess_Participant" StoreEntitySet="RemoteProcess">
+            <EndProperty Name="RemoteProcess">
+              <ScalarProperty Name="RemoteProcessId" ColumnName="RemoteProcessId" /></EndProperty>
+            <EndProperty Name="Participant">
+              <ScalarProperty Name="ParticipantId" ColumnName="OwnerId" /></EndProperty></AssociationSetMapping>
+          <EntitySetMapping Name="LocalProcessState">
+            <EntityTypeMapping TypeName="IsTypeOf(CloudDaemonWebModel.LocalProcessState)">
+              <MappingFragment StoreEntitySet="LocalProcessState">
+                <ScalarProperty Name="Mem" ColumnName="Mem" />
+                <ScalarProperty Name="Cpu" ColumnName="Cpu" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="LocalProcessStateId" ColumnName="LocalProcessStateId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="FK_LocalProcessState_LocalProcess" TypeName="CloudDaemonWebModel.FK_LocalProcessState_LocalProcess" StoreEntitySet="LocalProcessState">
+            <EndProperty Name="LocalProcessState">
+              <ScalarProperty Name="LocalProcessStateId" ColumnName="LocalProcessStateId" /></EndProperty>
+            <EndProperty Name="LocalProcess">
+              <ScalarProperty Name="LocalProcessId" ColumnName="LocalProcessId" /></EndProperty></AssociationSetMapping>
+          <AssociationSetMapping Name="FK_LocalProcessState_Participant" TypeName="CloudDaemonWebModel.FK_LocalProcessState_Participant" StoreEntitySet="LocalProcessState">
+            <EndProperty Name="LocalProcessState">
+              <ScalarProperty Name="LocalProcessStateId" ColumnName="LocalProcessStateId" /></EndProperty>
+            <EndProperty Name="Participant">
+              <ScalarProperty Name="ParticipantId" ColumnName="OwnerId" /></EndProperty></AssociationSetMapping>
+          <AssociationSetMapping Name="FK_ObjectType_Participant" TypeName="CloudDaemonWebModel.FK_ObjectType_Participant" StoreEntitySet="ObjectType">
+            <EndProperty Name="ObjectType">
+              <ScalarProperty Name="ObjectTypeId" ColumnName="ObjectTypeId" /></EndProperty>
+            <EndProperty Name="Participant">
+              <ScalarProperty Name="ParticipantId" ColumnName="OwnerId" /></EndProperty></AssociationSetMapping>
+          <AssociationSetMapping Name="FK_CloudObject_CloudObject" TypeName="CloudDaemonWebModel.FK_CloudObject_CloudObject" StoreEntitySet="CloudObject">
+            <EndProperty Name="CloudObject1">
+              <ScalarProperty Name="CloudObjectId" ColumnName="CloudObjectId" /></EndProperty>
+            <EndProperty Name="CloudObject">
+              <ScalarProperty Name="CloudObjectId" ColumnName="ParentId" /></EndProperty>
+            <Condition ColumnName="ParentId" IsNull="false" /></AssociationSetMapping></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="Daemon">
+        <EntityTypeShape EntityType="CloudDaemonWebModel.OpenIdUser" Width="1.5" PointX="3" PointY="3.875" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="CloudDaemonWebModel.Bubble" Width="1.5" PointX="5.75" PointY="11.875" Height="2.9417936197916639" />
+        <EntityTypeShape EntityType="CloudDaemonWebModel.BubbleLink" Width="1.5" PointX="8.5" PointY="11.125" Height="2.7494921874999996" />
+        <EntityTypeShape EntityType="CloudDaemonWebModel.CloudObject" Width="1.5" PointX="5.625" PointY="6.5" Height="3.5186979166666656" />
+        <EntityTypeShape EntityType="CloudDaemonWebModel.LocalProcess" PointX="3.125" PointY="11.375" Width="1.5" Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="CloudDaemonWebModel.ObjectType" Width="1.5" PointX="5.625" PointY="3.25" Height="2.7494921874999987" />
+        <EntityTypeShape EntityType="CloudDaemonWebModel.Participant" Width="1.5" PointX="3" PointY="7" Height="2.5571907552083317" />
+        <EntityTypeShape EntityType="CloudDaemonWebModel.RemoteProcess" Width="1.5" PointX="0.875" PointY="7.125" Height="2.1725878906249996" />
+        <AssociationConnector Association="CloudDaemonWebModel.FK_Bubble_LocalProcess">
+          <ConnectorPoint PointX="4.625" PointY="13.095896809895834" />
+          <ConnectorPoint PointX="5.75" PointY="13.095896809895834" />
+          </AssociationConnector>
+        <AssociationConnector Association="CloudDaemonWebModel.FK_BubbleLink_Bubble" >
+          <ConnectorPoint PointX="7.25" PointY="12.970896809895834" />
+          <ConnectorPoint PointX="8.5" PointY="12.970896809895834" />
+          </AssociationConnector>
+        <AssociationConnector Association="CloudDaemonWebModel.FK_CloudObject_Bubble" >
+          <ConnectorPoint PointX="6.4375" PointY="11.875" />
+          <ConnectorPoint PointX="6.4375" PointY="11.172506510416666" />
+          </AssociationConnector>
+        <AssociationConnector Association="CloudDaemonWebModel.FK_CloudObject_ObjectType" >
+          <ConnectorPoint PointX="6.375" PointY="5.9994921874999987" />
+          <ConnectorPoint PointX="6.375" PointY="6.5" />
+          </AssociationConnector>
+        <AssociationConnector Association="CloudDaemonWebModel.FK_CloudObject_Participant1" >
+          <ConnectorPoint PointX="4.5" PointY="7.9675575353616077" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="7.9675575353616068" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="7.9675575353616077" />
+          <ConnectorPoint PointX="5.625" PointY="7.9675575353616077" /></AssociationConnector>
+        <AssociationConnector Association="CloudDaemonWebModel.FK_LocalProcess_Participant">
+          <ConnectorPoint PointX="3.609375" PointY="10.134095052083332" />
+          <ConnectorPoint PointX="3.609375" PointY="11.375" />
+          </AssociationConnector>
+        <AssociationConnector Association="CloudDaemonWebModel.FK_RemoteProcess_LocalProcess">
+          <ConnectorPoint PointX="3.125" PointY="13.934591471354167" />
+          <ConnectorPoint PointX="3.1145833333333335" PointY="13.934591471354167" />
+          <ConnectorPoint PointX="2.9479166666666665" PointY="13.934591471354167" />
+          <ConnectorPoint PointX="2.34375" PointY="13.934591471354167" />
+          <ConnectorPoint PointX="2.34375" PointY="9.297587890625" /></AssociationConnector>
+        <AssociationConnector Association="CloudDaemonWebModel.FK_Participant_User" >
+          <ConnectorPoint PointX="3.75" PointY="6.2398893229166674" />
+          <ConnectorPoint PointX="3.75" PointY="7" />
+          </AssociationConnector>
+        <AssociationConnector Association="CloudDaemonWebModel.FK_Bubble_Participant" ManuallyRouted="false" >
+          <ConnectorPoint PointX="3.03125" PointY="10.134095052083332" />
+          <ConnectorPoint PointX="3.03125" PointY="14.598043619791666" />
+          <ConnectorPoint PointX="5.75" PointY="14.598043619791666" />
+          </AssociationConnector>
+        <AssociationConnector Association="CloudDaemonWebModel.FK_RemoteProcess_Participant" >
+          <ConnectorPoint PointX="3" PointY="8.2112939453125" />
+          <ConnectorPoint PointX="2.375" PointY="8.2112939453125" />
+          </AssociationConnector>
+        <EntityTypeShape EntityType="CloudDaemonWebModel.LocalProcessState" Width="1.5" PointX="0.75" PointY="11.125" Height="2.3648893229166674" />
+        <AssociationConnector Association="CloudDaemonWebModel.FK_LocalProcessState_LocalProcess" >
+          <ConnectorPoint PointX="3.125" PointY="12.432444661458334" />
+          <ConnectorPoint PointX="3.1145833333333335" PointY="12.432444661458334" />
+          <ConnectorPoint PointX="2.9479166666666665" PointY="12.432444661458334" />
+          <ConnectorPoint PointX="2.4270833333333335" PointY="12.432444661458334" />
+          <ConnectorPoint PointX="2.2604166666666665" PointY="12.432444661458334" />
+          <ConnectorPoint PointX="2.25" PointY="12.432444661458334" /></AssociationConnector>
+        <AssociationConnector Association="CloudDaemonWebModel.FK_LocalProcessState_Participant" ManuallyRouted="false" >
+          <ConnectorPoint PointX="3" PointY="9.7470914713541656" />
+          <ConnectorPoint PointX="2.4270833333333335" PointY="9.7470914713541656" />
+          <ConnectorPoint PointX="2.2604166666666665" PointY="9.7470914713541656" />
+          <ConnectorPoint PointX="0.78125" PointY="9.7470914713541656" />
+          <ConnectorPoint PointX="0.78125" PointY="11.125" />
+          </AssociationConnector>
+        <AssociationConnector Association="CloudDaemonWebModel.FK_ObjectType_Participant" >
+          <ConnectorPoint PointX="4.5" PointY="9.0601150707232154" />
+          <ConnectorPoint PointX="4.875" PointY="9.0601150707232154" />
+          <ConnectorPoint PointX="4.875" PointY="4.62474609375" />
+          <ConnectorPoint PointX="5.625" PointY="4.62474609375" />
+          </AssociationConnector>
+        <AssociationConnector Association="CloudDaemonWebModel.FK_CloudObject_CloudObject" >
+          <ConnectorPoint PointX="7.125" PointY="8.10569451121795" />
+          <ConnectorPoint PointX="7.375" PointY="8.10569451121795" />
+          <ConnectorPoint PointX="7.375" PointY="9.60160051081731" />
+          <ConnectorPoint PointX="7.125" PointY="9.60160051081731" /></AssociationConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

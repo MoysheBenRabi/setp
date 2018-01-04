@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A71FB047-DA57-4AA5-9B70-F1EA4FECF4F7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CloudMath</RootNamespace>
+    <AssemblyName>CloudMath</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Add.cs" />
+    <Compile Include="AddScaled.cs" />
+    <Compile Include="Barycentric.cs" />
+    <Compile Include="Billboard.cs" />
+    <Compile Include="BoundingBox.cs" />
+    <Compile Include="Camera.cs" />
+    <Compile Include="CatmullRom.cs" />
+    <Compile Include="Clamp.cs" />
+    <Compile Include="ClipPlanes.cs" />
+    <Compile Include="Color3.cs" />
+    <Compile Include="Color4.cs" />
+    <Compile Include="ConstrainedBillboard.cs" />
+    <Compile Include="Cross.cs" />
+    <Compile Include="DegreesToRadians.cs" />
+    <Compile Include="Distance.cs" />
+    <Compile Include="DistanceSquared.cs" />
+    <Compile Include="Dot.cs" />
+    <Compile Include="FastDistance.cs" />
+    <Compile Include="FastInvSqrt.cs" />
+    <Compile Include="FastLength.cs" />
+    <Compile Include="FastNormalize.cs" />
+    <Compile Include="FastSqrt.cs" />
+    <Compile Include="Flip.cs" />
+    <Compile Include="FMath.cs" />
+    <Compile Include="Frustum.cs" />
+    <Compile Include="Hermite.cs" />
+    <Compile Include="Internals.cs" />
+    <Compile Include="Intersect.cs" />
+    <Compile Include="Invert.cs" />
+    <Compile Include="InvertRigidBody.cs" />
+    <Compile Include="Lerp.cs" />
+    <Compile Include="LookAt.cs" />
+    <Compile Include="Matrix2.cs" />
+    <Compile Include="Matrix3.cs" />
+    <Compile Include="Matrix4.cs" />
+    <Compile Include="MatrixElementOrder.cs" />
+    <Compile Include="Max.cs" />
+    <Compile Include="MaxDistance.cs" />
+    <Compile Include="Merge.cs" />
+    <Compile Include="MidPoint.cs" />
+    <Compile Include="Min.cs" />
+    <Compile Include="MinDistance.cs" />
+    <Compile Include="Minor.cs" />
+    <Compile Include="Model.cs" />
+    <Compile Include="Multiply.cs" />
+    <Compile Include="Negate.cs" />
+    <Compile Include="Normalize.cs" />
+    <Compile Include="Orthographic.cs" />
+    <Compile Include="Perspective.cs" />
+    <Compile Include="PlanarShadow.cs" />
+    <Compile Include="Plane.cs" />
+    <Compile Include="Project.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quaternion.cs" />
+    <Compile Include="RadiansToDegrees.cs" />
+    <Compile Include="Ray.cs" />
+    <Compile Include="Reflect.cs" />
+    <Compile Include="Rotate.cs" />
+    <Compile Include="RotateX.cs" />
+    <Compile Include="RotateY.cs" />
+    <Compile Include="RotateZ.cs" />
+    <Compile Include="Scale.cs" />
+    <Compile Include="Selection.cs" />
+    <Compile Include="Slerp.cs" />
+    <Compile Include="SmoothStep.cs" />
+    <Compile Include="Sphere.cs" />
+    <Compile Include="Subtract.cs" />
+    <Compile Include="Transform.cs" />
+    <Compile Include="Translate.cs" />
+    <Compile Include="Transpose.cs" />
+    <Compile Include="Unproject.cs" />
+    <Compile Include="Vector2.cs" />
+    <Compile Include="Vector3.cs" />
+    <Compile Include="Vector4.cs" />
+    <Compile Include="Volume.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

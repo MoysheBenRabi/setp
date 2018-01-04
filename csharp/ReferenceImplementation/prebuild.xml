@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Prebuild xmlns="http://dnpb.sourceforge.net/schemas/prebuild-1.7.xsd" version="1.7">
+  <Solution name="MXP" activeConfig="Debug" path="./" version="0.0.1-$Rev: 0001 $">
+    
+    <Configuration name="Debug">
+      <Options>
+        <CompilerDefines>TRACE;DEBUG</CompilerDefines>
+        <OptimizeCode>false</OptimizeCode>
+        <CheckUnderflowOverflow>false</CheckUnderflowOverflow>
+        <AllowUnsafe>false</AllowUnsafe>
+        <WarningLevel>4</WarningLevel>
+        <WarningsAsErrors>false</WarningsAsErrors>
+        <SuppressWarnings>CS1591</SuppressWarnings>
+        <OutputPath>bin</OutputPath>
+        <DebugInformation>true</DebugInformation>
+        <IncrementalBuild>true</IncrementalBuild>
+        <NoStdLib>false</NoStdLib>
+      </Options>
+    </Configuration>
+    
+    <Configuration name="Release">
+      <Options>
+        <CompilerDefines>TRACE</CompilerDefines>
+        <OptimizeCode>true</OptimizeCode>
+        <CheckUnderflowOverflow>false</CheckUnderflowOverflow>
+        <AllowUnsafe>false</AllowUnsafe>
+        <WarningLevel>4</WarningLevel>
+        <WarningsAsErrors>false</WarningsAsErrors>
+        <SuppressWarnings>CS1591</SuppressWarnings>
+        <OutputPath>bin</OutputPath>
+        <DebugInformation>false</DebugInformation>
+        <IncrementalBuild>true</IncrementalBuild>
+        <NoStdLib>false</NoStdLib>
+      </Options>
+    </Configuration>
+
+
+    <Project name="MXP" path="MXP" type="Library">
+      <Configuration name="Debug">
+        <Options>
+          <OutputPath>../lib/</OutputPath>
+        </Options>
+      </Configuration>
+      <Configuration name="Release">
+        <Options>
+          <OutputPath>../lib/</OutputPath>
+          <XmlDocFile>MXP.xml</XmlDocFile>
+
+        </Options>
+      </Configuration>
+
+      <ReferencePath>../lib/</ReferencePath>
+
+      <Reference name="System"/>
+      <Reference name="System.Core"/>
+      <Reference name="System.Xml"/>
+      <Reference name="System.Data"/>
+      <Reference name="log4net.dll"/>
+      <Reference name="protobuf-net.dll"/>
+
+      <Files>
+        <Match pattern="*.cs" recurse="true"/>
+      </Files>
+    </Project>
+
+    <Project name="MXPTests" path="MXPTests" type="Library">
+      <Configuration name="Debug">
+        <Options>
+          <OutputPath>../lib/</OutputPath>
+        </Options>
+      </Configuration>
+      <Configuration name="Release">
+        <Options>
+          <OutputPath>../lib/</OutputPath>
+          <XmlDocFile>MXPTests.xml</XmlDocFile>
+
+        </Options>
+      </Configuration>
+
+      <ReferencePath>../lib/</ReferencePath>
+
+      <Reference name="System"/>
+      <Reference name="System.Core"/>
+      <Reference name="System.Xml"/>
+      <Reference name="System.Data"/>
+      <Reference name="log4net.dll"/>
+      <Reference name="nunit.framework.dll"/>
+      <Reference name="protobuf-net.dll"/>
+      <Reference name="MXP"/>
+
+      <Files>
+        <Match pattern="*.cs" recurse="true"/>
+        <Match pattern="*.config" recurse="true"  buildAction="Content" copyToOutput="Always" />
+      </Files>
+    </Project>
+
+  </Solution>
+</Prebuild>
+ 

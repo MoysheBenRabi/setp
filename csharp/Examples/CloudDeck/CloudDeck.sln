@@ -1,0 +1,47 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudDeck", "CloudDeck\CloudDeck.csproj", "{B1A2A76A-0000-0000-0000-000000000000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MXP", "..\..\ReferenceImplementation\MXP\MXP.csproj", "{F2339E89-0000-0000-0000-000000000000}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MXPTests", "..\..\ReferenceImplementation\MXPTests\MXPTests.csproj", "{B2866FB6-0000-0000-0000-000000000000}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "CloudDeckSetup", "CloudDeckSetup\CloudDeckSetup.vdproj", "{FF6CB82A-B509-4CA6-8A57-78CD1D5E03D2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1A2A76A-0000-0000-0000-000000000000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1A2A76A-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1A2A76A-0000-0000-0000-000000000000}.Debug|x86.ActiveCfg = Debug|x86
+		{B1A2A76A-0000-0000-0000-000000000000}.Debug|x86.Build.0 = Debug|x86
+		{B1A2A76A-0000-0000-0000-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1A2A76A-0000-0000-0000-000000000000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1A2A76A-0000-0000-0000-000000000000}.Release|x86.ActiveCfg = Release|x86
+		{B1A2A76A-0000-0000-0000-000000000000}.Release|x86.Build.0 = Release|x86
+		{F2339E89-0000-0000-0000-000000000000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2339E89-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2339E89-0000-0000-0000-000000000000}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F2339E89-0000-0000-0000-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2339E89-0000-0000-0000-000000000000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2339E89-0000-0000-0000-000000000000}.Release|x86.ActiveCfg = Release|Any CPU
+		{B2866FB6-0000-0000-0000-000000000000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2866FB6-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2866FB6-0000-0000-0000-000000000000}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B2866FB6-0000-0000-0000-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2866FB6-0000-0000-0000-000000000000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2866FB6-0000-0000-0000-000000000000}.Release|x86.ActiveCfg = Release|Any CPU
+		{FF6CB82A-B509-4CA6-8A57-78CD1D5E03D2}.Debug|Any CPU.ActiveCfg = Debug
+		{FF6CB82A-B509-4CA6-8A57-78CD1D5E03D2}.Debug|x86.ActiveCfg = Debug
+		{FF6CB82A-B509-4CA6-8A57-78CD1D5E03D2}.Release|Any CPU.ActiveCfg = Release
+		{FF6CB82A-B509-4CA6-8A57-78CD1D5E03D2}.Release|x86.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

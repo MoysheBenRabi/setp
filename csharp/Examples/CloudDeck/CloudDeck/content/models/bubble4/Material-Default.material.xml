@@ -1,0 +1,5 @@
+<Material class="Translucent">
+	<Shader source="shaders/model.shader" />
+
+	<Sampler name="albedoMap" map="models/bubble4/bubblematerial2.png" />
+</Material>

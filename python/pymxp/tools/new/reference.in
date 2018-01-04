@@ -1,0 +1,26 @@
+shared_ptr<mxp::message::list_bubbles_rsp> generate_list_bubbles_rsp() {
+    shared_ptr<mxp::message::list_bubbles_rsp>
+        lbr(new mxp::message::list_bubbles_rsp());
+
+    mxp::message::bubble_fragment bf;
+
+    init_bubble_fragment(bf);
+
+    bf.bubble_name = L"TestBubble1";
+    lbr->bubble_fragments.push_back(bf);
+
+    bf.bubble_name = L"TestBubble2";
+    lbr->bubble_fragments.push_back(bf);
+
+    bf.bubble_name = L"TestBubble3";
+    lbr->bubble_fragments.push_back(bf);
+
+    bf.bubble_name = L"TestBubble4";
+    lbr->bubble_fragments.push_back(bf);
+
+    bf.bubble_name = L"TestBubble5";
+    lbr->bubble_fragments.push_back(bf);
+
+    return lbr;
+}
+

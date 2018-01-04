@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<project name="MXP" default="test">
+  <target name="test">
+      <nunit2 failonerror="true" verbose="true">
+      <formatter type="Xml" usefile="true" extension=".xml" outputdir="./lib/reports" />
+      <test>
+        <assemblies>
+          <include name="./lib/MXPTests.dll" />
+        </assemblies>
+      </test>
+    </nunit2>
+  </target>
+</project>
