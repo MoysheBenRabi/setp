@@ -21,7 +21,6 @@ In alphabetical order:
 * Tommi Laukkanen - Founder - Specification contributor - C# developer
 
 # Specification contributor
-In alphabetical order:
 * Ben Lindquist
 * John Hurliman
 * Jon Watte
