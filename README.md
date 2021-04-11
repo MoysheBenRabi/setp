@@ -4,6 +4,6 @@ The goal of this open source project is to define minimal and easy to implement 
 
 In addition to MSD/MXP there are the following protocol candidates for authentication, asset and inventory access. These additional protocols leverage HTTP as a transport layer protocol. HTTP access to internet is available in most networks without explicit firewall configurations.
 
-Asset and inventory access protocol: OpenSimulator AssetServerProposal
-Authentication protocol: OpenId
-Authorization protocol: OAuth
+* Asset and inventory access protocol: [OpenSimulator AssetServerProposal](http://opensimulator.org/wiki/AssetServerProposal/ClientDocs)
+* Authentication protocol: [OpenId](http://en.wikipedia.org/wiki/Openid)
+* Authorization protocol: [OAuth](https://en.wikipedia.org/wiki/OAuth)
