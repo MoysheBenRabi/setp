@@ -7,3 +7,7 @@ In addition to MSD/MXP there are the following protocol candidates for authentic
 * Asset and inventory access protocol: [OpenSimulator AssetServerProposal](http://opensimulator.org/wiki/AssetServerProposal/ClientDocs)
 * Authentication protocol: [OpenId](http://en.wikipedia.org/wiki/Openid)
 * Authorization protocol: [OAuth](https://en.wikipedia.org/wiki/OAuth)
+
+For more information, see [The Big Picture](https://github.com/MoysheBenRabi/setp/wiki/The-Big-Picture)
+
+
